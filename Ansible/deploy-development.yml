@@ -17,7 +17,7 @@
     
     - name: Pull API Docker image
       docker_image:
-        name: ***REMOVED***/net-core-devsecops
+        name: ***REMOVED***/renter-score-api-v2
         source: pull
 
     - name: Run API container
