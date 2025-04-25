@@ -38,5 +38,5 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook deploy.yml -i inventory
+        ansible-playbook deploy-development.yml -i inventory
       working-directory: Ansible      
