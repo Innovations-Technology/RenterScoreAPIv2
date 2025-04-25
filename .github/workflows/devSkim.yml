@@ -1,0 +1,35 @@
+name: DevSkim Analysis
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  devskim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0'
+
+      - name: Install Microsoft DevSkim CLI
+        run: dotnet tool install --global Microsoft.CST.DevSkim.CLI
+
+      - name: Run Microsoft DevSkim
+        run: |
+          devskim analyze \
+          --output-format sarif \
+          --output-file devskim-results.sarif \
+          --source-code .
+        working-directory: RenterScoreAPIv2
+
+      - name: Upload DevSkim results
+        uses: actions/upload-artifact@v4
+        with:
+          name: devskim-results
+          path: RenterScoreAPIv2/devskim-results.sarif
