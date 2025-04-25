@@ -18,7 +18,7 @@ jobs:
           dotnet-version: '8.0'
 
       - name: Install Microsoft DevSkim CLI
-        run: dotnet tool install --global Microsoft.DevSkim.CLI
+        run: dotnet tool install --global Microsoft.CST.DevSkim.CLI
 
       - name: Run Microsoft DevSkim
         run: devskim analyze --output-format sarif --output-file devskim-results.sarif
