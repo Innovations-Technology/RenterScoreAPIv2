@@ -22,7 +22,7 @@
 
     - name: Run API container
       docker_container:
-        name: net-core-devsecops
+        name: renter-score-api-v2
         image: ***REMOVED***/renter-score-api-v2
         state: started
         restart_policy: always
