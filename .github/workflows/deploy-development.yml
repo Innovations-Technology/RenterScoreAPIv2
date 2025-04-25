@@ -21,6 +21,7 @@ jobs:
         docker build -t renter-score-api-v2:latest .
         docker tag renter-score-api-v2:latest steven743/renter-score-api-v2:latest
         docker push steven743/renter-score-api-v2:latest
+      working-directory: RenterScoreAPIv2
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -37,4 +38,5 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook Ansible/deploy.yml -i Ansible/inventory      
+        ansible-playbook deploy.yml -i inventory
+      working-directory: Ansible      
