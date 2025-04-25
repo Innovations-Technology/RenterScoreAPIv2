@@ -17,8 +17,5 @@ WORKDIR /app
 # 5. Copy the published application to the runtime image
 COPY --from=build /app/out .
 
-# 6. Expose the port for the application
-EXPOSE 5000
-
-# 7. Run the application
+# 6. Run the application
 ENTRYPOINT ["dotnet", "RenterScoreAPIv2.dll"]
