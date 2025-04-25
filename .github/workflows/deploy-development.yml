@@ -1,0 +1,40 @@
+name: Deploy - Development
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.STEVEN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "***REMOVED***" --password-stdin
+    
+    - name: Build Docker image
+      run: |
+        docker build -t renter-score-api-v2:latest .
+        docker tag renter-score-api-v2:latest ***REMOVED***/renter-score-api-v2:latest
+        docker push ***REMOVED***/renter-score-api-v2:latest
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+  
+    - name: Install Ansible
+      run: pip install ansible
+
+    - name: Add SSH key
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Run Ansible Playbook
+      run: |
+        ansible-playbook Ansible/deploy.yml -i Ansible/inventory      
