@@ -19,6 +19,7 @@
       docker_image:
         name: steven743/renter-score-api-v2
         source: pull
+        force_source: always
 
     - name: Run API container
       docker_container:
