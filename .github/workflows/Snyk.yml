@@ -3,9 +3,11 @@ name: Snyk
 on:
   push:
     branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
 
 jobs:
-  snyk:
+  snyk-scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
