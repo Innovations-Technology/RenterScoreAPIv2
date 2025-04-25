@@ -21,7 +21,11 @@ jobs:
         run: dotnet tool install --global Microsoft.CST.DevSkim.CLI
 
       - name: Run Microsoft DevSkim
-        run: devskim analyze --output-format sarif --output-file devskim-results.sarif
+        run: |
+          devskim analyze \
+          --output-format sarif \
+          --output-file devskim-results.sarif \
+          --source-code .
         working-directory: RenterScoreAPIv2
 
       - name: Upload DevSkim results
