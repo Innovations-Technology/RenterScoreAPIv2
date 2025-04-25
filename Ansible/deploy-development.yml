@@ -29,5 +29,5 @@
         ports:
           - "80:5000"
         env:
-          ASPNETCORE_ENVIRONMENT: "Production"
+          ASPNETCORE_ENVIRONMENT: "Development"
           HTTP_PORTS: "5000"
