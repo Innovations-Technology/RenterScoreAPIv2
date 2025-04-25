@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: RenterScoreAPIv2/.
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - HTTP_PORTS=5000
+    networks:
+      - renterscore-network
+    restart: unless-stopped
+
+networks:
+  renterscore-network:
+    driver: bridge 
