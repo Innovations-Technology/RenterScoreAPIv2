@@ -1,0 +1,33 @@
+- hosts: droplet
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: true
+      become: true
+
+    - name: Ensure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: true
+      become: true
+    
+    - name: Pull API Docker image
+      docker_image:
+        name: steven743/net-core-devsecops
+        source: pull
+
+    - name: Run API container
+      docker_container:
+        name: net-core-devsecops
+        image: steven743/renter-score-api-v2
+        state: started
+        restart_policy: always
+        ports:
+          - "80:5000"
+        env:
+          ASPNETCORE_ENVIRONMENT: "Production"
+          HTTP_PORTS: "5000"
