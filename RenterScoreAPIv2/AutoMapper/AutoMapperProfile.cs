@@ -11,9 +11,10 @@ public class AutoMapperProfile : Profile
         CreateMap<DateTime, string>()
             .ConvertUsing(src => src.ToString("yyyy-MM-ddTHH:mm:ss"));
 
-        CreateMap<PropertyWithUserProfile, PropertyViewModel>()
+        CreateMap<PropertyDetails, PropertyViewModel>()
             .IncludeMembers(src => src.Property)
-            .ForMember(src => src.User, opt => opt.MapFrom(src => src.UserProfile));
+            .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.UserProfile))
+            .ForPath(dest => dest.User.PropertyRole, opt => opt.MapFrom(src => src.User.PropertyRole));
 
         CreateMap<Property, PropertyViewModel>()
             .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src))
@@ -22,6 +23,5 @@ public class AutoMapperProfile : Profile
         
         CreateMap<UserProfile, UserProfileViewModel>()
             .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom(src => $"http://renterscore.live/{src.ProfileImage}"));
-        
     }
 }
