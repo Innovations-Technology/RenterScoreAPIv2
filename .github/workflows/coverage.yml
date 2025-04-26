@@ -30,4 +30,10 @@ jobs:
           --target "dotnet" \
           --targetargs "test --no-build --configuration Release" \
           -f=opencover \
-          -o="coverage.xml"
+          -o="coverage.xml" \
+          --threshold 70 \
+          --threshold-type line \
+          --threshold-stat total \
+          --threshold 60 \
+          --threshold-type branch \
+          --threshold-stat total
