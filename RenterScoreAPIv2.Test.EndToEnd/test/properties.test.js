@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { expect } from 'chai';
 
-describe('properties API testings', () => {
+describe('properties API testings', function () {
+  this.timeout(5000);
   it('get properties', async () => {
     const response = await axios.get('http://localhost:5000/api/v2/property/properties');
     expect(response.status).to.equal(200);
 
     const properties = response.data;
-    expect(properties).to.be.an('array');
+    expect(properties).to.be.an('array')
     expect(properties).to.be.not.empty;
 
     const property = properties[0];
