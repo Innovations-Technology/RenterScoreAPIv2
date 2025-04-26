@@ -15,8 +15,12 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       
-      - name: Restore dependencies
+      - name: Restore .NET dependencies
         run: dotnet restore
+      
+      - name: Restore npm dependencies
+        run: npm install
+        working-directory: RenterScoreAPIv2.Test.EndToEnd
 
       - name: Install Snyk CLI
         run: npm install -g snyk
