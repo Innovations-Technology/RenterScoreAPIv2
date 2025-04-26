@@ -1,6 +1,5 @@
 namespace RenterScoreAPIv2.Property;
 
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 public class AddressViewModel
