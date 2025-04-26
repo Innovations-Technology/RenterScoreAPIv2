@@ -21,7 +21,13 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
-      - name: Run Snyk to check for vulnerabilities
+      - name: Run Snyk to check for .NET projects
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk test
+        run: snyk test --file=RenterScoreAPIv2.sln
+      
+      - name: Run Snyk to check for end-to-end tests
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk test --file=package.json
+        working-directory: RenterScoreAPIv2.Test.EndToEnd
