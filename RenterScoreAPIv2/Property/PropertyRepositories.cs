@@ -12,20 +12,17 @@ public class PropertyRepository(AppDbContext context)
         return await _context.Properties.ToListAsync();
     }
 
-    public async Task<Property?> GetPropertyByIdAsync(int id)
+    public async Task<IEnumerable<PropertyWithUserProfile>> GetPropertiesWithUserProfilesAsync()
     {
-        return await _context.Properties.FindAsync(id);
-    }
-
-    public async Task AddPropertyAsync(Property property)
-    {
-        await _context.Properties.AddAsync(property);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task UpdatePropertyAsync(Property property)
-    {
-        _context.Properties.Update(property);
-        await _context.SaveChangesAsync();
+        return await (
+            from property in _context.Properties
+            join userProfile in _context.UserProfiles
+            on property.UserId equals userProfile.UserId into userProfilesGroup
+            from userProfile in userProfilesGroup.DefaultIfEmpty()
+            select new PropertyWithUserProfile
+            {
+                Property = property,
+                UserProfile = userProfile
+            }).ToListAsync();
     }
 }

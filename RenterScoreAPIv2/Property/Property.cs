@@ -87,8 +87,5 @@ public class Property
     [Required]
     [Column("user_id")]
     public long UserId { get; set; }
-
-    // [ForeignKey("UserId")]
-    // public virtual User? User { get; set; }
 }
 
