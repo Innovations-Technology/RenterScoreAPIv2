@@ -1,9 +1,10 @@
-namespace RenterScoreAPIv2.Property;
+namespace RenterScoreAPIv2.PropertyDetails;
 
 using System.Text.Json.Serialization;
+using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.UserProfile;
 
-public class PropertyViewModel
+public class PropertyDetailsViewModel
 {
     public required AddressViewModel Address { get; set; }
 
