@@ -18,6 +18,7 @@ public class DataModelTests
     public void TestGettersAndSetters(Type type)
     {
         var instance = Activator.CreateInstance(type);
+        Assert.IsNotNull(instance);
         foreach (var property in type.GetProperties())
         {
             if (property.CanRead)
