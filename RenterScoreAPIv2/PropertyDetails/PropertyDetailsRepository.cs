@@ -1,9 +1,9 @@
-namespace RenterScoreAPIv2.Property;
+namespace RenterScoreAPIv2.PropertyDetails;
 
 using Microsoft.EntityFrameworkCore;
 using RenterScoreAPIv2.EntityFramework;
 
-public class PropertyRepository(AppDbContext context)
+public class PropertyDetailsRepository(AppDbContext context)
 {
     private readonly AppDbContext _context = context;
 
