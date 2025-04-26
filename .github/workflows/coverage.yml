@@ -1,0 +1,36 @@
+name: coverage scan
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: RenterScoreAPIv2.Test.Unit
+
+    - name: Install Coverlet
+      run: dotnet tool install --global coverlet.console
+
+    - name: Upload coverage to SonarQube
+      run: |
+        dotnet build --no-incremental
+        coverlet .\bin\Debug\net8.0\enterScoreAPIv2.Test.Unit.dll \
+          --target "dotnet" \
+          --targetargs "test --no-build" \
+          -f=opencover \
+          -o="coverage.xml" \
+          --exclude="[RenterScoreAPIv2.Test.Unit]*"
+      working-directory: RenterScoreAPIv2.Test.Unit
