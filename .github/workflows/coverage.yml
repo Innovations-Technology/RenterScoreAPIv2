@@ -1,4 +1,4 @@
-name: coverage scan
+name: Coverage Scan
 
 on:
   pull_request:
@@ -19,7 +19,6 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: RenterScoreAPIv2.Test.Unit
 
     - name: Install Coverlet
       run: dotnet tool install --global coverlet.console
