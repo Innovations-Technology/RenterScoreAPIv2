@@ -1,7 +1,7 @@
 namespace RenterScoreAPIv2.Property;
 
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using RenterScoreAPIv2.UserProfile;
 
 public class PropertyViewModel
 {
@@ -17,7 +17,7 @@ public class PropertyViewModel
     public int? Bedrooms { get; set; }
 
     [JsonPropertyName("created_date")]
-    public DateTime CreatedDate { get; set; }
+    public string? CreatedDate { get; set; }
 
     [JsonPropertyName("created_user")]
     public long CreatedUser { get; set; }
@@ -26,23 +26,34 @@ public class PropertyViewModel
 
     public string? Description { get; set; }
 
+    [JsonPropertyName("hero_image")]
     public string? HeroImage { get; set; }
+
+    public string[] Images { get; set; } = [];
+
+    [JsonPropertyName("modified_date")]
+    public string? ModifiedDate { get; set; }
+
+    [JsonPropertyName("modified_user")]
+    public long ModifiedUser { get; set; }
 
     public int? Price { get; set; }
 
-    [Required]
-    public string PropertyStatus { get; set; } = string.Empty;
+    [JsonPropertyName("property_id")]
+    public long PropertyId { get; set; }
 
-    [Required]
-    public string PropertyType { get; set; } = string.Empty;
+    [JsonPropertyName("property_status")]
+    public string? PropertyStatus { get; set; }
 
-    [Required]
-    public string RentType { get; set; } = string.Empty;
+    [JsonPropertyName("property_type")]
+    public string? PropertyType { get; set; }
+
+    [JsonPropertyName("rent_type")]
+    public string? RentType { get; set; }
 
     public string? Size { get; set; }
 
     public string? Title { get; set; }
 
-    [Required]
-    public long UserId { get; set; }
+    public required UserProfileViewModel User { get; set; }
 }
