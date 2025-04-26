@@ -17,5 +17,5 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.MapControllers();
-app.Map("hello", () => "Hello World!");
+app.MapGet("api/health", () => Results.Ok("ok")).WithName("HealthCheck").WithOpenApi();
 app.Run();
