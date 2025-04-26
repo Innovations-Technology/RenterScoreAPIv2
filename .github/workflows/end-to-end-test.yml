@@ -15,6 +15,15 @@ jobs:
     - name: Compose Docker up
       run: docker compose up -d
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.x'
+    
+    - name: Install dependencies
+      run: npm install
+      working-directory: RenterScoreAPIv2.Test.EndToEnd
+    
     - name: Wait for API to be ready
       run: |
         for i in {1..30}; do
@@ -27,15 +36,6 @@ jobs:
         done
         echo "API did not start in time"
         exit 1
-    
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22.x'
-    
-    - name: Install dependencies
-      run: npm install
-      working-directory: RenterScoreAPIv2.Test.EndToEnd
 
     - name: Run end-to-end tests
       run: npm test
