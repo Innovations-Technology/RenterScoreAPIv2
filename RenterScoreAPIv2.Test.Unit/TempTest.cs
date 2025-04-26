@@ -21,7 +21,7 @@ namespace RenterScoreAPIv2.Test.Unit
             int actual = 2 + 3;
 
             // Assert
-            Assert.AreEqual(expected, actual, "2 + 3 should equal 5");
+            Assert.That(actual, Is.EqualTo(expected), "2 + 3 should equal 5");
         }
 
         [TearDown]
