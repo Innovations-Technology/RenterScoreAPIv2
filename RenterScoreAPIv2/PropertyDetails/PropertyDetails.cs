@@ -1,5 +1,6 @@
-namespace RenterScoreAPIv2.Property;
+namespace RenterScoreAPIv2.PropertyDetails;
 
+using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.UserProfile;
 using RenterScoreAPIv2.User;
 
