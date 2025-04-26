@@ -3,7 +3,7 @@ namespace RenterScoreAPIv2.Property;
 using global::AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/properties")]
+[Route("api/v2/property/properties")]
 [ApiController]
 public class PropertyController(
     PropertyRepository propertyRepository,
