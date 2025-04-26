@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  docker:
+  deploy-to-development-server: 
     runs-on: ubuntu-latest
 
     steps:
