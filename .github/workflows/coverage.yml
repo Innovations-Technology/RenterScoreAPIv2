@@ -27,9 +27,9 @@ jobs:
     - name: Scan
       run: |
         dotnet build --no-incremental
-        coverlet .\RenterScoreAPIv2.Test.Unit\bin\Debug\net8.0\enterScoreAPIv2.Test.Unit.dll \
+        coverlet .\RenterScoreAPIv2.Test.Unit\bin\Release\net8.0\enterScoreAPIv2.Test.Unit.dll \
           --target "dotnet" \
-          --targetargs "test --no-build" \
+          --targetargs "test --no-build --configuration Release" \
           -f=opencover \
           -o="coverage.xml" \
           --exclude="[RenterScoreAPIv2.Test.Unit]*"
