@@ -25,7 +25,7 @@ jobs:
 
     - name: Scan
       run: |
-        dotnet build --no-incremental --configuration Release 
+        dotnet build --no-restore --configuration Release 
         coverlet ./RenterScoreAPIv2.Test.Unit/bin/Release/net8.0/RenterScoreAPIv2.Test.Unit.dll \
           --target "dotnet" \
           --targetargs "test --no-build --configuration Release" \
