@@ -32,3 +32,4 @@
         env:
           ASPNETCORE_ENVIRONMENT: "Development"
           HTTP_PORTS: "5000"
+          CONNECTIONSTRING_DEFAULT: "{{ connectionstring_default }}"

@@ -38,5 +38,6 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook deploy-development.yml -i inventory
+        ansible-playbook deploy-development.yml -i inventory \
+        --extra-vars "connectionstring_default='${{ secrets.CONNECTIONSTRING_DEFAULT }}'"
       working-directory: Ansible      

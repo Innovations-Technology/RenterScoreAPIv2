@@ -6,6 +6,7 @@ services:
     ports:
       - "5000:5000"
     environment:
+      - CONNECTIONSTRING_DEFAULT=${CONNECTIONSTRING_DEFAULT}
       - ASPNETCORE_ENVIRONMENT=Development
       - HTTP_PORTS=5000
     networks:
