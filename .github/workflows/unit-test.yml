@@ -22,6 +22,9 @@ jobs:
 
     - name: Install Coverlet
       run: dotnet tool install --global coverlet.console
+    
+    - name: Install ReportGenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Scan
       run: |
@@ -34,3 +37,13 @@ jobs:
           --threshold 55 \
           --threshold-type line \
           --threshold-stat total
+    
+    - name: Generate Report
+      run: reportgenerator -reports:coverage.xml -targetdir:coverage-report -reporttypes:Html
+
+    - name: Upload Coverage Report Folder
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: coverage-report/
+    
