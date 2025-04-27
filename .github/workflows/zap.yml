@@ -12,7 +12,6 @@ jobs:
 
     steps:    
     - name: Run ZAP API Scan
-      continue-on-error: true
       run: |
         docker run --user root --network="host" \
         -v ${{ github.workspace }}:/zap/wrk/:rw \
