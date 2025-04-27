@@ -23,18 +23,17 @@ jobs:
         working-directory: RenterScoreAPIv2.Test.EndToEnd
 
       - name: Install Snyk CLI
-        run: npm install -g snyk
+        run: npm install -g snyk snyk-to-html
 
-      - name: Run Snyk to check for .NET projects
+      - name: Run Snyk to scan all projects
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk test --file=RenterScoreAPIv2.sln
+        run: snyk test --all-projects --json > snyk-report.json
       
-      - name: Run Snyk to check for end-to-end tests
+      - name: Generate Snyk report
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk test --file=package.json
-        working-directory: RenterScoreAPIv2.Test.EndToEnd
+        run: snyk-to-html -i snyk-report.json -o snyk-report.html
 
       - name: Upload Snyk Reports as Artifacts
         uses: actions/upload-artifact@v4
@@ -42,4 +41,4 @@ jobs:
           name: snyk-reports
           path: |
             snyk-report.json
-            snyk-report.sarif
+            snyk-report.html
