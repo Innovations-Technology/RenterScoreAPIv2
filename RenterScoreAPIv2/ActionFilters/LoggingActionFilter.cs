@@ -15,8 +15,7 @@ public class LoggingActionFilter : Attribute, IActionFilter
     {
         var path = context.HttpContext.Request.Path;
         var httpMethod = context.HttpContext.Request.Method;
-        var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.ffffff");
-        _logger.LogInformation("[{Timestamp}][{httpMethod}] {path}", timestamp, httpMethod, path);
+        _logger.LogInformation("[{httpMethod}] {path}", httpMethod, path);
     }
 
     public void OnActionExecuted(ActionExecutedContext context)
