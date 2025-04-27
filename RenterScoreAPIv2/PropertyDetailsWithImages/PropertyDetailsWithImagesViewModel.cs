@@ -1,9 +1,9 @@
-namespace RenterScoreAPIv2.PropertyDetails;
+namespace RenterScoreAPIv2.PropertyDetailsWithImages;
 
 using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.UserProfile;
 
-public class PropertyDetailsViewModel
+public class PropertyDetailsWithImagesViewModel
 {
     public required AddressViewModel Address { get; set; }
     public required UserProfileViewModel User { get; set; }
