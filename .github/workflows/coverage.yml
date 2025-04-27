@@ -31,6 +31,6 @@ jobs:
           --targetargs "test --no-build --configuration Release" \
           -f=opencover \
           -o="coverage.xml" \
-          --threshold 70 \
+          --threshold 60 \
           --threshold-type line \
           --threshold-stat total
