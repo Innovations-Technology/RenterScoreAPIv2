@@ -26,11 +26,15 @@ jobs:
         run: npm install -g snyk snyk-to-html
 
       - name: Run Snyk to scan all projects
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           snyk test --all-projects --json > snyk-report.json || exit_code=$?
           echo "SNYK_EXIT_CODE=$exit_code" >> $GITHUB_ENV
       
       - name: Generate Snyk report
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk-to-html -i snyk-report.json -o snyk-report.html
 
       - name: Upload Snyk Reports as Artifacts
