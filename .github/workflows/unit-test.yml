@@ -1,28 +1,36 @@
-name: Unit Test
+name: Unit Test with Coverage
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
-  unit-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v4
-        with: 
-          dotnet-version: '8.0.x'
-      
-      - name: Restore dependencies
-        run: dotnet restore
-        working-directory: RenterScoreAPIv2.Test.Unit
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
 
-      - name: Build
-        run: dotnet build --no-restore --configuration Release
-        working-directory: RenterScoreAPIv2.Test.Unit
+    - name: Restore dependencies
+      run: dotnet restore
 
-      - name: Run tests
-        run: dotnet test --no-build --verbosity normal --configuration Release
-        working-directory: RenterScoreAPIv2.Test.Unit
+    - name: Install Coverlet
+      run: dotnet tool install --global coverlet.console
+
+    - name: Scan
+      run: |
+        dotnet build --no-restore --configuration Release 
+        coverlet ./RenterScoreAPIv2.Test.Unit/bin/Release/net8.0/RenterScoreAPIv2.Test.Unit.dll \
+          --target "dotnet" \
+          --targetargs "test --no-build --configuration Release" \
+          -f=opencover \
+          -o="coverage.xml" \
+          --threshold 55 \
+          --threshold-type line \
+          --threshold-stat total
