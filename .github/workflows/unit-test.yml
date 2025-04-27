@@ -21,7 +21,7 @@ jobs:
       run: dotnet restore
 
     - name: Install Coverlet
-      run: dotnet tool install --global coverlet.console
+      run: dotnet tool install --global coverlet.console reportgenerator
 
     - name: Scan
       run: |
@@ -34,3 +34,13 @@ jobs:
           --threshold 55 \
           --threshold-type line \
           --threshold-stat total
+    
+    - name: Generate Report
+      run: reportgenerator -reports:coverage.xml -targetdir:coverage-report -reporttypes:Html
+
+    - name: Upload Coverage Report Folder
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: coverage-report/
+    
