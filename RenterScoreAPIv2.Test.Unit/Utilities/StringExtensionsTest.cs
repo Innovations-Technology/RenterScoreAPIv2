@@ -7,12 +7,6 @@ using RenterScoreAPIv2.Utilities;
 public class StringExtensionsTest
 {
     [Test]
-    public void Fail()
-    {
-        Assert.Fail();
-    }
-
-    [Test]
     public void ToSnakeCase_NullInput_ReturnsNull()
     {
         string input = null;
