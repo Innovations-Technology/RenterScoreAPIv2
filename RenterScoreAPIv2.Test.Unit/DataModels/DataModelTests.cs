@@ -5,6 +5,7 @@ using RenterScoreAPIv2.User;
 using RenterScoreAPIv2.UserProfile;
 using RenterScoreAPIv2.PropertyDetails;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
+using RenterScoreAPIv2.PropertyImage;
 
 [TestFixture]
 public class DataModelTests
@@ -16,6 +17,8 @@ public class DataModelTests
     [TestCase(typeof(AddressViewModel))]
     [TestCase(typeof(PropertyDetails))]
     [TestCase(typeof(PropertyDetailsWithImagesViewModel))]
+    [TestCase(typeof(PropertyImage))]
+    [TestCase(typeof(PropertyDetailsWithImages))]
     public void TestGettersAndSetters(Type type)
     {
         var instance = Activator.CreateInstance(type);

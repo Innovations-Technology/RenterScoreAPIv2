@@ -16,17 +16,17 @@ public class AutoMapperProfile : Profile
         CreateMap<PropertyDetailsWithImages, PropertyDetailsWithImagesViewModel>()
             .IncludeMembers(src => src.Property)
             .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.UserProfile))
-            .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.PropertyImages.Select(pi => $"http://renterscore.live/{pi.ImageUrl}")))
+            .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.PropertyImages.Select(pi => $"https://renterscore.live/{pi.ImageUrl}")))
             .ForPath(dest => dest.User.PropertyRole, opt => opt.MapFrom(src => src.User.PropertyRole));
 
 
         CreateMap<Property, PropertyDetailsWithImagesViewModel>()
             .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src))
-            .ForMember(dest => dest.HeroImage, opt => opt.MapFrom(src => $"http://renterscore.live/{src.HeroImage}"));
+            .ForMember(dest => dest.HeroImage, opt => opt.MapFrom(src => $"https://renterscore.live/{src.HeroImage}"));
         CreateMap<Property, AddressViewModel>();
         
         CreateMap<UserProfile, UserProfileViewModel>()
-            .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom(src => $"http://renterscore.live/{src.ProfileImage}"));
+            .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom(src => $"https://renterscore.live/{src.ProfileImage}"));
 
         CreateMap<PropertyDetails, PropertyDetailsWithImages>();
     }
