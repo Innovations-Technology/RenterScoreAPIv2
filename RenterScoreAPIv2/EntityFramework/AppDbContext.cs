@@ -4,10 +4,50 @@ using Microsoft.EntityFrameworkCore;
 using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.UserProfile;
 using RenterScoreAPIv2.User;
+using RenterScoreAPIv2.Utilities;
 
 public class AppDbContext(DbContextOptions dbContextOptions) : DbContext(dbContextOptions)
 {
     public DbSet<Property> Properties { get; set; }
     public DbSet<UserProfile> UserProfiles { get; set; }
     public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        SetDefaultSchema(modelBuilder);
+        SetTableName(modelBuilder);
+        SetSetColumnName(modelBuilder);
+        base.OnModelCreating(modelBuilder);
+    }
+
+    private static void SetDefaultSchema(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema("dbo");
+    }
+
+    private static void SetTableName(ModelBuilder modelBuilder)
+    {
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (entityType.ClrType == typeof(User))
+            {
+                entityType.SetTableName("users");
+            }
+            else
+            {
+                entityType.SetTableName(entityType.ClrType.Name.ToSnakeCase());
+            }
+        }
+    }
+
+    private static void SetSetColumnName(ModelBuilder modelBuilder)
+    {
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            foreach (var property in entityType.GetProperties())
+            {
+                property.SetColumnName(property.Name.ToSnakeCase());
+            }
+        }
+    }
 }
