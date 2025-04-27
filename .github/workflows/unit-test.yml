@@ -24,7 +24,7 @@ jobs:
       run: dotnet tool install --global coverlet.console
     
     - name: Install ReportGenerator
-      run: dotnet tool install --global reportgenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
     - name: Scan
       run: |
