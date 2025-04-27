@@ -14,7 +14,7 @@ public static class StringExtensions
         for (int i = 0; i < input.Length; i++)
         {
             char c = input[i];
-            if (char.IsUpper(c) && i > 0 && !char.IsWhiteSpace(input[i - 1]))
+            if (char.IsUpper(c) && i > 0)
             {
                 result.Append('_');
             }
