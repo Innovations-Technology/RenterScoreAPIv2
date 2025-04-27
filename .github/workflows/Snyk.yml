@@ -29,8 +29,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
-          snyk test --all-projects --json > snyk-report.json | exit_code=$?
-          echo "$exit_code"
+          snyk test --all-projects --json > snyk-report.json || true
+          exit_code=$?
           echo "SNYK_EXIT_CODE=$exit_code" >> $GITHUB_ENV
         continue-on-error: true
       
