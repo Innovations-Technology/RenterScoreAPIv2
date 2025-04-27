@@ -19,10 +19,15 @@ jobs:
         zaproxy/zap-stable zap-api-scan.py \
         -t http://128.199.231.220/swagger/v1/swagger.json \
         -f openapi \
-        -r zap-report.html
+        -r zap-report.html \
+        -I || exit_code=$?
+        echo "ZAP_EXIT_CODE=$exit_code" >> $GITHUB_ENV
 
     - name: Upload ZAP Report
       uses: actions/upload-artifact@v4
       with:
         name: ZAP Scan Report
         path: zap-report.html
+
+    - name: Exit with Snyk exit code
+      run: exit $ZAP_EXIT_CODE
