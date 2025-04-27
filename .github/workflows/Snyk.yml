@@ -35,3 +35,11 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk test --file=package.json
         working-directory: RenterScoreAPIv2.Test.EndToEnd
+
+      - name: Upload Snyk Reports as Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-reports
+          path: |
+            snyk-report.json
+            snyk-report.sarif
