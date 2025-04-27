@@ -8,11 +8,10 @@ using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.PropertyImage;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
-    optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default")));
+    optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTIONSTRING_DEFAULT")));
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<LoggingActionFilter>();
