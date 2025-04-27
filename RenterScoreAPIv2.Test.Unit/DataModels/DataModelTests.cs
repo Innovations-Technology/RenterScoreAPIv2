@@ -4,6 +4,8 @@ using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.User;
 using RenterScoreAPIv2.UserProfile;
 using RenterScoreAPIv2.PropertyDetails;
+using RenterScoreAPIv2.PropertyDetailsWithImages;
+using RenterScoreAPIv2.PropertyImage;
 
 [TestFixture]
 public class DataModelTests
@@ -14,11 +16,13 @@ public class DataModelTests
     [TestCase(typeof(UserProfileViewModel))]
     [TestCase(typeof(AddressViewModel))]
     [TestCase(typeof(PropertyDetails))]
-    [TestCase(typeof(PropertyDetailsViewModel))]
+    [TestCase(typeof(PropertyDetailsWithImagesViewModel))]
+    [TestCase(typeof(PropertyImage))]
+    [TestCase(typeof(PropertyDetailsWithImages))]
     public void TestGettersAndSetters(Type type)
     {
         var instance = Activator.CreateInstance(type);
-        Assert.IsNotNull(instance);
+        Assert.That(instance, Is.Not.Null);
         foreach (var property in type.GetProperties())
         {
             if (property.CanRead)
