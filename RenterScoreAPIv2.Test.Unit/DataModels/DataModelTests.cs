@@ -27,7 +27,7 @@ public class DataModelTests
             }
             if (property.CanWrite)
             {
-                object? defaultValue = null;
+                object defaultValue = null;
                 if (property.PropertyType.IsValueType)
                 {
                     defaultValue = Activator.CreateInstance(property.PropertyType);
