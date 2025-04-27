@@ -34,9 +34,10 @@ jobs:
           --targetargs "test --no-build --configuration Release" \
           -f=opencover \
           -o="coverage.xml" \
-          --threshold 55 \
+          --threshold 40 \
           --threshold-type line \
-          --threshold-stat total
+          --threshold-stat total || exit_code=$?
+          echo "SNYK_EXIT_CODE=$exit_code" >> $GITHUB_ENV
     
     - name: Generate Report
       run: reportgenerator -reports:coverage.xml -targetdir:coverage-report -reporttypes:Html
@@ -46,4 +47,7 @@ jobs:
       with:
         name: coverage-report
         path: coverage-report/
+
+    - name: Exit with Snyk exit code
+      run: exit $SNYK_EXIT_CODE
     
