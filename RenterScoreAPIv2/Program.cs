@@ -6,6 +6,7 @@ using RenterScoreAPIv2.EntityFramework;
 using RenterScoreAPIv2.PropertyDetails;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.PropertyImage;
+using RenterScoreAPIv2.Tab;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -22,7 +23,9 @@ builder.Services.AddScoped<PropertyDetailsRepository>();
 builder.Services.AddScoped<PropertyImageRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<LoggingActionFilter>();
+builder.Services.AddScoped<IPropertyDetailsWithImagesService, PropertyDetailsWithImagesService>();
 builder.Services.AddScoped<PropertyDetailsWithImagesService>();
+builder.Services.AddScoped<ITabFactory, TabFactory>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
