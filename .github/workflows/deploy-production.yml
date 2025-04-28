@@ -38,6 +38,6 @@ jobs:
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook -i inventories/production/hosts.yml -i deploy-droplet.yml \
+        ansible-playbook -i inventories/production/hosts.yml deploy-droplet.yml \
         --extra-vars "connectionstring_default='${{ secrets.CONNECTIONSTRING_DEFAULT }}'"
       working-directory: Ansible      
