@@ -17,19 +17,18 @@
     
     - name: Pull API Docker image
       docker_image:
-        name: ***REMOVED***/renter-score-api-v2
+        name: "{{ docker_image }}"
         source: pull
         force_source: true
 
     - name: Run API container
       docker_container:
-        name: renter-score-api-v2
-        image: ***REMOVED***/renter-score-api-v2
+        name: "{{ docker_container_name }}"
+        image: "{{ docker_image }}"
         state: started
         restart_policy: always
-        ports:
-          - "80:5000"
+        ports: "{{ docker_ports }}"
         env:
-          ASPNETCORE_ENVIRONMENT: "Development"
-          HTTP_PORTS: "5000"
+          ASPNETCORE_ENVIRONMENT: "{{ aspnetcore_environment }}"
+          HTTP_PORTS: "{{ http_ports }}"
           CONNECTIONSTRING_DEFAULT: "{{ connectionstring_default }}"
