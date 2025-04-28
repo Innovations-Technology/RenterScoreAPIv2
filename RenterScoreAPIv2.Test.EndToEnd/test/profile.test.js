@@ -34,7 +34,7 @@ describe('Profile Tab API testing', function () {
     }
   });
 
-  it('get profile tab with non-existent userId returns empty items', async () => {
+  it('get profile tab with non-existent userId returns empty resources', async () => {
     const nonExistentUserId = 999999;
     const response = await axios.get(`http://localhost:5000/api/v2/tab/profile?userId=${nonExistentUserId}`);
     expect(response.status).to.equal(200);
@@ -44,8 +44,8 @@ describe('Profile Tab API testing', function () {
     
     const profileCard = tab.cards.find(card => card.name === 'profile');
     expect(profileCard).to.exist;
-    expect(profileCard.items).to.be.an('array');
-    expect(profileCard.items).to.be.empty;
+    expect(profileCard.resources).to.be.an('array');
+    expect(profileCard.resources).to.be.empty;
   });
 });
 
@@ -60,8 +60,8 @@ function validateProfileTab(tab) {
   expect(profileCard).to.have.property('type').that.equals('card');
   expect(profileCard).to.have.property('resources').that.is.an('array');
   
-  if (profileCard.items.length > 0) {
-    const userProfile = profileCard.items[0];
+  if (profileCard.resources.length > 0) {
+    const userProfile = profileCard.resources[0];
     validateUserProfile(userProfile);
   }
 }
