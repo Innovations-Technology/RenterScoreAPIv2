@@ -4,27 +4,28 @@ using Moq;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.Tab;
 using RenterScoreAPIv2.Tab.Tabs;
+using RenterScoreAPIv2.UserProfile;
 
 [TestFixture]
 public class TabFactoryTests
 {
-    private Mock<IPropertyDetailsWithImagesService> _mockService;
+    private Mock<IPropertyDetailsWithImagesService> _mockPropertyDetailsService;
+    private Mock<IUserProfileService> _mockUserProfileService;
     private TabFactory _tabFactory;
 
     [SetUp]
     public void Setup()
     {
-        _mockService = new Mock<IPropertyDetailsWithImagesService>();
-        _tabFactory = new TabFactory(_mockService.Object);
+        _mockPropertyDetailsService = new Mock<IPropertyDetailsWithImagesService>();
+        _mockUserProfileService = new Mock<IUserProfileService>();
+        _tabFactory = new TabFactory(_mockPropertyDetailsService.Object, _mockUserProfileService.Object);
     }
 
     [Test]
     public void CreateTab_WithHomeId_ReturnsHomeTab()
     {
-        // Act
         var result = _tabFactory.CreateTab("home");
 
-        // Assert
         Assert.That(result, Is.Not.Null);
         Assert.That(result, Is.TypeOf<HomeTab>());
     }
@@ -32,10 +33,8 @@ public class TabFactoryTests
     [Test]
     public void CreateTab_WithBookmarksId_ReturnsBookmarksTab()
     {
-        // Act
         var result = _tabFactory.CreateTab("bookmarks");
 
-        // Assert
         Assert.That(result, Is.Not.Null);
         Assert.That(result, Is.TypeOf<BookmarksTab>());
     }
@@ -43,10 +42,8 @@ public class TabFactoryTests
     [Test]
     public void CreateTab_WithProfileId_ReturnsProfileTab()
     {
-        // Act
         var result = _tabFactory.CreateTab("profile");
 
-        // Assert
         Assert.That(result, Is.Not.Null);
         Assert.That(result, Is.TypeOf<ProfileTab>());
     }
@@ -54,7 +51,6 @@ public class TabFactoryTests
     [Test]
     public void CreateTab_WithInvalidId_ThrowsArgumentException()
     {
-        // Act & Assert
         Assert.Throws<ArgumentException>(() => _tabFactory.CreateTab("invalid"));
     }
 } 
