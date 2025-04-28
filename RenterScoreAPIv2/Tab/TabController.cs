@@ -1,6 +1,7 @@
 namespace RenterScoreAPIv2.Tab;
 
 using Microsoft.AspNetCore.Mvc;
+using RenterScoreAPIv2.Tab.Tabs;
 
 [Route("api/v2/tab")]
 [ApiController]
@@ -14,11 +15,25 @@ public class TabController : ControllerBase
     }
 
     [HttpGet("{tabId}")]
-    public async Task<ActionResult<BaseTab>> GetTabData(string tabId)
+    public async Task<ActionResult<BaseTab>> GetTabData(string tabId, [FromQuery] long? userId = null)
     {
         try
         {
             var tab = _tabFactory.CreateTab(tabId);
+            
+            if (tabId.ToLower() == "profile")
+            {
+                if (!userId.HasValue)
+                {
+                    return BadRequest("UserId is required for profile tab");
+                }
+                
+                if (tab is ProfileTab profileTab)
+                {
+                    profileTab.SetUserId(userId.Value);
+                }
+            }
+            
             await tab.LoadDataAsync();
             return Ok(tab);
         }

@@ -1,14 +1,27 @@
 namespace RenterScoreAPIv2.Tab.Tabs;
 
+using RenterScoreAPIv2.Tab.Cards;
+using RenterScoreAPIv2.UserProfile;
+
 public class ProfileTab : BaseTab
 {
-    public ProfileTab()
+    private readonly ProfileCard _profileCard;
+    private long _userId;
+
+    public ProfileTab(IUserProfileService userProfileService)
     {
+        _profileCard = new ProfileCard(userProfileService);
+    }
+
+    public void SetUserId(long userId)
+    {
+        _userId = userId;
+        _profileCard.SetUserId(userId);
     }
 
     public override async Task LoadDataAsync()
     {
-        // Placeholder for future implementation
-        await Task.CompletedTask;
+        await _profileCard.LoadDataAsync();
+        Cards.Add(_profileCard);
     }
 } 
