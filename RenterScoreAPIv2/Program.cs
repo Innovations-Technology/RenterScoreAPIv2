@@ -26,10 +26,15 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<LoggingActionFilter>();
 builder.Services.AddScoped<IPropertyDetailsWithImagesService, PropertyDetailsWithImagesService>();
 builder.Services.AddScoped<PropertyDetailsWithImagesService>();
-builder.Services.AddScoped<ITabFactory, TabFactory>();
 builder.Services.AddScoped<UserProfileRepository>();
-builder.Services.AddScoped<IUserProfileRepository, LoggingUserProfileRepositoryDecorator>();
+builder.Services.AddScoped<IUserProfileRepository>(provider => 
+{
+    var repository = provider.GetRequiredService<UserProfileRepository>();
+    var logger = provider.GetRequiredService<ILogger<LoggingUserProfileRepositoryDecorator>>();
+    return new LoggingUserProfileRepositoryDecorator(repository, logger);
+});
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
+builder.Services.AddScoped<ITabFactory, TabFactory>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
