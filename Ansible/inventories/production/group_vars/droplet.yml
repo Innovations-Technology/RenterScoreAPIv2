@@ -3,4 +3,4 @@ docker_container_name: dotnet-api
 docker_ports:
   - "5000:5000"
 aspnetcore_environment: Production
-http_ports: "5000"
+aspnetcore_urls: "http://+:5000"
