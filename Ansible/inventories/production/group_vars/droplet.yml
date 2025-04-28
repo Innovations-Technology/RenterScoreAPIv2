@@ -1,0 +1,6 @@
+docker_image: ***REMOVED***/dotnet-api:latest
+docker_container_name: dotnet-api
+docker_ports:
+  - "5000:5000"
+aspnetcore_environment: Production
+http_ports: "5000"
