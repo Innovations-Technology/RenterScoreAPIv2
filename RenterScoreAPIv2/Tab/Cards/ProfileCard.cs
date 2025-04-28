@@ -7,7 +7,7 @@ public class ProfileCard : BaseCard
 {
     private readonly IUserProfileService _userProfileService;
     private long _userId;
-    private UserProfileViewModel? _userProfile;
+    private List<UserProfileViewModel> _userProfiles = [];
 
     public ProfileCard(IUserProfileService userProfileService)
     {
@@ -20,17 +20,18 @@ public class ProfileCard : BaseCard
         _userId = userId;
     }
 
-    [JsonPropertyName("items")]
-    public List<UserProfileViewModel> Items { get; set; } = [];
+    // [JsonPropertyName("items")]
+    // public List<UserProfileViewModel> Items { get; set; } = [];
 
-    public override object Resources => new { };
+    public override object Resources => _userProfiles;
 
     public override async Task LoadDataAsync()
     {
-        _userProfile = await _userProfileService.GetUserProfileByUserIdAsync(_userId);
-        if (_userProfile != null)
+        var userProfile = await _userProfileService.GetUserProfileByUserIdAsync(_userId);
+        if (userProfile != null)
         {
-            Items = [_userProfile];
+            _userProfiles = [userProfile];
+            //Items = [userProfile];
         }
     }
 } 
