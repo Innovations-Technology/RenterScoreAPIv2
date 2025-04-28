@@ -67,14 +67,14 @@ function validateProfileTab(tab) {
 }
 
 function validateUserProfile(userProfile) {
-  expect(userProfile).to.have.property('userId').that.is.a('number');
+  expect(userProfile).to.have.property('user_id').that.is.a('number');
   expect(userProfile).to.have.property('email');
   
   // Optional fields can be null
-  expect(userProfile).to.have.property('firstName');
-  expect(userProfile).to.have.property('lastName');
-  expect(userProfile).to.have.property('profileImage');
-  expect(userProfile).to.have.property('contactNumber');
+  expect(userProfile).to.have.property('first_name');
+  expect(userProfile).to.have.property('last_name');
+  expect(userProfile).to.have.property('profile_image');
+  expect(userProfile).to.have.property('contact_number');
   expect(userProfile).to.have.property('company');
-  expect(userProfile).to.have.property('propertyRole');
+  expect(userProfile).to.have.property('property_role');
 } 
