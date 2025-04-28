@@ -13,16 +13,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Log in to Docker Hub
+    - name: Log in to Steven's Docker Hub
       run: echo "${{ secrets.STEVEN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "steven743" --password-stdin
     
-    - name: Build Docker image
+    - name: Build Docker image and push to Steven's Docker Hub
       run: |
         docker build -t renter-score-api-v2:latest .
         docker tag renter-score-api-v2:latest steven743/renter-score-api-v2:latest
         docker push steven743/renter-score-api-v2:latest
       working-directory: RenterScoreAPIv2
     
+    - name: Log in to Tun Tun's Docker Hub
+      run: echo "${{ secrets.TUNTUN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "***REMOVED***" --password-stdin
+
+    - name: push to Tun Tun's Docker Hub
+      run: |
+        docker tag renter-score-api-v2:latest ***REMOVED***/dotnet-api:latest
+        docker push ***REMOVED***/dotnet-api:latest
+      working-directory: RenterScoreAPIv2
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
