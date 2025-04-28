@@ -58,7 +58,7 @@ function validateProfileTab(tab) {
   const profileCard = tab.cards.find(card => card.name === 'profile');
   expect(profileCard).to.exist;
   expect(profileCard).to.have.property('type').that.equals('card');
-  expect(profileCard).to.have.property('items').that.is.an('array');
+  expect(profileCard).to.have.property('resources').that.is.an('array');
   
   if (profileCard.items.length > 0) {
     const userProfile = profileCard.items[0];
