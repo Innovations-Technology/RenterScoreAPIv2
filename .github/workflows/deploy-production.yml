@@ -1,26 +1,26 @@
-name: Deploy - Development
+name: Deploy - Production
 
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
-  deploy-to-development-server: 
+  deploy-to-production-server: 
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Log in to Steven's Docker Hub
-      run: echo "${{ secrets.STEVEN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "***REMOVED***" --password-stdin
+    - name: Log in to Tun Tun's Docker Hub
+      run: echo "${{ secrets.TUNTUN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "***REMOVED***" --password-stdin
     
     - name: Build Docker image and push to Steven's Docker Hub
       run: |
         docker build -t renter-score-api-v2:latest .
-        docker tag renter-score-api-v2:latest ***REMOVED***/renter-score-api-v2:latest
-        docker push ***REMOVED***/renter-score-api-v2:latest
+        docker tag renter-score-api-v2:latest ***REMOVED***/dotnet-api:latest
+        docker push ***REMOVED***/dotnet-api:latest
       working-directory: RenterScoreAPIv2
 
     - name: Set up Python
@@ -34,10 +34,10 @@ jobs:
     - name: Add SSH key
       uses: webfactory/ssh-agent@v0.9.0
       with:
-        ssh-private-key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
 
     - name: Run Ansible Playbook
       run: |
-        ansible-playbook -i inventories/development/hosts.yml deploy-droplet.yml \
+        ansible-playbook -i inventories/production/hosts.yml deploy-droplet.yml \
         --extra-vars "connectionstring_default='${{ secrets.CONNECTIONSTRING_DEFAULT }}'"
       working-directory: Ansible      
