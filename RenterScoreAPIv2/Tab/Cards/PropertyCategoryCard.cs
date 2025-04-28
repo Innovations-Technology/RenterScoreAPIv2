@@ -21,7 +21,10 @@ public class PropertyCategoryCard : BaseCard
 
     public override async Task LoadDataAsync()
     {
-        var tasks = _pagingCards.Select(card => card.LoadDataAsync());
-        await Task.WhenAll(tasks);
+        // Avoid concurrently using DbContext
+        foreach (var card in _pagingCards)
+        {
+            await card.LoadDataAsync();
+        }
     }
 } 
