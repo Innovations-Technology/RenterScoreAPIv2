@@ -61,4 +61,4 @@
           ASPNETCORE_URLS: "{{ aspnetcore_urls }}"
           CONNECTIONSTRING_DEFAULT: "{{ connectionstring_default }}"
         networks:
-          - name: renterscore_default
+          - name: renter-score_default
