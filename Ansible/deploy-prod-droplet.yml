@@ -58,5 +58,5 @@
         ports: "{{ docker_ports }}"
         env:
           ASPNETCORE_ENVIRONMENT: "{{ aspnetcore_environment }}"
-          HTTP_PORTS: "{{ http_ports }}"
+          ASPNETCORE_URLS: "{{ aspnetcore_urls }}"
           CONNECTIONSTRING_DEFAULT: "{{ connectionstring_default }}"
