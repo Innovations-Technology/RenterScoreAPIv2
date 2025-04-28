@@ -1,2 +1,0 @@
-[droplet]
-128.199.231.220 ansible_user=root ansible_ssh_common_args='-o StrictHostKeyChecking=no'
