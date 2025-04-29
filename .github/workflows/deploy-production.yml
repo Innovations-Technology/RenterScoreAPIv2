@@ -14,13 +14,13 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Log in to Tun Tun's Docker Hub
-      run: echo "${{ secrets.TUNTUN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "aungtuntun" --password-stdin
+      run: echo "${{ secrets.TUNTUN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "${{ secrets.PROD_DOCKER_USERNAME }}" --password-stdin
     
     - name: Build Docker image and push to Steven's Docker Hub
       run: |
         docker build -t renter-score-api-v2:latest .
-        docker tag renter-score-api-v2:latest aungtuntun/dotnet-api:latest
-        docker push aungtuntun/dotnet-api:latest
+        docker tag renter-score-api-v2:latest ${{ secrets.PROD_DOCKER_USERNAME }}/dotnet-api:latest
+        docker push ${{ secrets.PROD_DOCKER_USERNAME }}/dotnet-api:latest
       working-directory: RenterScoreAPIv2
 
     - name: Set up Python
@@ -40,4 +40,7 @@ jobs:
       run: |
         ansible-playbook -i inventories/production/hosts.yml deploy-prod-droplet.yml \
         --extra-vars "connectionstring_default='${{ secrets.CONNECTIONSTRING_DEFAULT }}'"
+      env:
+          PROD_DROPLET_IP: ${{ secrets.PROD_DROPLET_IP }}
+          PROD_DOCKER_USERNAME: ${{ secrets.PROD_DOCKER_USERNAME }}
       working-directory: Ansible      
