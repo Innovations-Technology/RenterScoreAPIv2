@@ -16,7 +16,7 @@ jobs:
         docker run --user root --network="host" \
         -v ${{ github.workspace }}:/zap/wrk/:rw \
         zaproxy/zap-stable zap-api-scan.py \
-        -t http://***REMOVED***/swagger/v1/swagger.json \
+        -t http://${{ secrets.DEV_DROPLET_IP }}/swagger/v1/swagger.json \
         -f openapi \
         -r zap-report.html \
         -I || exit_code=$?
