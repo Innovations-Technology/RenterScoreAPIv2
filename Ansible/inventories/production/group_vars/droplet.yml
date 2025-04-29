@@ -1,4 +1,4 @@
-docker_image: aungtuntun/dotnet-api:latest
+docker_image: "{{ lookup('env', 'PROD_DOCKER_USERNAME') }}/dotnet-api:latest"
 docker_container_name: dotnet-api
 docker_ports:
   - "5000:5000"
