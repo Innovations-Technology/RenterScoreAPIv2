@@ -13,14 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Log in to Steven's Docker Hub
-      run: echo "${{ secrets.STEVEN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "***REMOVED***" --password-stdin
+    - name: Log in to DEV Docker Hub
+      run: echo "${{ secrets.DEV_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "${{ secrets.DEV_DOCKER_USERNAME }}" --password-stdin
     
-    - name: Build Docker image and push to Steven's Docker Hub
+    - name: Build Docker image and push to DEV Docker Hub
       run: |
         docker build -t renter-score-api-v2:latest .
-        docker tag renter-score-api-v2:latest ***REMOVED***/renter-score-api-v2:latest
-        docker push ***REMOVED***/renter-score-api-v2:latest
+        docker tag renter-score-api-v2:latest ${{ secrets.DEV_DOCKER_USERNAME }}/renter-score-api-v2:latest
+        docker push ${{ secrets.DEV_DOCKER_USERNAME }}/renter-score-api-v2:latest
       working-directory: RenterScoreAPIv2
 
     - name: Set up Python
@@ -40,4 +40,7 @@ jobs:
       run: |
         ansible-playbook -i inventories/development/hosts.yml deploy-dev-droplet.yml \
         --extra-vars "connectionstring_default='${{ secrets.CONNECTIONSTRING_DEFAULT }}'"
+      env:
+          DEV_DROPLET_IP: ${{ secrets.DEV_DROPLET_IP }}
+          DEV_DOCKER_USERNAME: ${{ secrets.DEV_DOCKER_USERNAME }}
       working-directory: Ansible      
