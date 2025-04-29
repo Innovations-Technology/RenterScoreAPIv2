@@ -1,4 +1,4 @@
-docker_image: steven743/renter-score-api-v2
+docker_image: "{{ lookup('env', 'DEV_DOCKER_USERNAME') }}/renter-score-api-v2"
 docker_container_name: renter-score-api-v2
 docker_ports:
   - "80:5000"

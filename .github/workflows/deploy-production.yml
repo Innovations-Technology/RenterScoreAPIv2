@@ -13,10 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Log in to Tun Tun's Docker Hub
-      run: echo "${{ secrets.TUNTUN_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "${{ secrets.PROD_DOCKER_USERNAME }}" --password-stdin
+    - name: Log in to PROD Docker Hub
+      run: echo "${{ secrets.PROD_DOCKER_READ_WRITE_TOKEN }}" | docker login -u "${{ secrets.PROD_DOCKER_USERNAME }}" --password-stdin
     
-    - name: Build Docker image and push to Steven's Docker Hub
+    - name: Build Docker image and push to PROD Docker Hub
       run: |
         docker build -t renter-score-api-v2:latest .
         docker tag renter-score-api-v2:latest ${{ secrets.PROD_DOCKER_USERNAME }}/dotnet-api:latest
