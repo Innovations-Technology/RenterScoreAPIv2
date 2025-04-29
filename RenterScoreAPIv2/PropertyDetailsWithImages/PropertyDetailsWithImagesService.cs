@@ -4,14 +4,21 @@ using global::AutoMapper;
 using RenterScoreAPIv2.PropertyDetails;
 using RenterScoreAPIv2.PropertyImage;
 
-public class PropertyDetailsWithImagesService(
-    IPropertyDetailsRepository propertyDetailsRepository,
-    PropertyImageRepository propertyImageRepository,
-    IMapper mapper)
+public class PropertyDetailsWithImagesService : IPropertyDetailsWithImagesService
 {
-    private readonly IPropertyDetailsRepository _propertyDetailsRepository = propertyDetailsRepository;
-    private readonly PropertyImageRepository _propertyImageRepository = propertyImageRepository;
-    private readonly IMapper _mapper = mapper;
+    private readonly IPropertyDetailsRepository _propertyDetailsRepository;
+    private readonly PropertyImageRepository _propertyImageRepository;
+    private readonly IMapper _mapper;
+
+    public PropertyDetailsWithImagesService(
+        IPropertyDetailsRepository propertyDetailsRepository,
+        PropertyImageRepository propertyImageRepository,
+        IMapper mapper)
+    {
+        _propertyDetailsRepository = propertyDetailsRepository;
+        _propertyImageRepository = propertyImageRepository;
+        _mapper = mapper;
+    }
 
     public async Task<IEnumerable<PropertyDetailsWithImages>> GetPropertyDetailsWithImagesListAsync()
     {
