@@ -1,6 +1,5 @@
 # RenterScoreAPIv2
 
-- Development Server: http://128.199.231.220/swagger/index.html
 - RenterScoreAPIv2 is a .NET 8.0-based API designed to provide scoring and analytics for rental properties. It includes features like Swagger integration, unit testing, and CI/CD pipelines.
 
 ## Features
