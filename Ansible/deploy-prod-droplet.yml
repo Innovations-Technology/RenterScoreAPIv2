@@ -13,28 +13,28 @@
         update_cache: true
       become: true
 
-    - name: Add Docker GPG key
-      apt_key:
-          url: https://download.docker.com/linux/ubuntu/gpg
-          state: present
-      become: true
+    # - name: Add Docker GPG key
+    #   apt_key:
+    #       url: https://download.docker.com/linux/ubuntu/gpg
+    #       state: present
+    #   become: true
 
-    - name: Add Docker APT repository
-      apt_repository:
-          repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-          state: present
-          filename: docker
-          update_cache: true
-      become: true
+    # - name: Add Docker APT repository
+    #   apt_repository:
+    #       repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    #       state: present
+    #       filename: docker
+    #       update_cache: true
+    #   become: true
 
-    - name: Ensure Docker CE is installed (latest version)
-      apt:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - docker-compose-plugin
-        state: latest
-      become: true
+    # - name: Ensure Docker CE is installed (latest version)
+    #   apt:
+    #     name:
+    #       - docker-ce
+    #       - docker-ce-cli
+    #       - docker-compose-plugin
+    #     state: latest
+    #   become: true
 
     - name: Ensure Docker is running
       service:
@@ -49,6 +49,11 @@
         source: pull
         force_source: true
 
+    - name: Create Docker network
+      docker_network:
+        name: renter-score-network
+        state: present
+        
     - name: Run API container
       docker_container:
         name: "{{ docker_container_name }}"
