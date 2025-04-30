@@ -19,7 +19,7 @@ describe('properties API testings', function () {
 describe('properties API testings', function () {
   this.timeout(5000);
   it('get property', async () => {
-    const response = await axios.get('http://localhost:5000/api/v2/property/property-details/1');
+    const response = await axios.get('http://localhost:5000/api/v2/property/details/1');
     expect(response.status).to.equal(200);
 
     const property = response.data;
