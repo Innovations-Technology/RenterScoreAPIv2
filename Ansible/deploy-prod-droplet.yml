@@ -48,17 +48,16 @@
         name: "{{ docker_image }}"
         source: pull
         force_source: true
+    
+    - name: docker compose down
+      ansible.builtin.command: docker-compose down
+      args:
+        chdir: /root/renter-score
 
-    - name: Run API container
-      docker_container:
-        name: "{{ docker_container_name }}"
-        image: "{{ docker_image }}"
-        state: started
-        restart_policy: always
-        ports: "{{ docker_ports }}"
-        env:
-          ASPNETCORE_ENVIRONMENT: "{{ aspnetcore_environment }}"
-          ASPNETCORE_URLS: "{{ aspnetcore_urls }}"
-          CONNECTIONSTRING_DEFAULT: "{{ connectionstring_default }}"
-        networks:
-          - name: renter-score_default
+    - name: docker compose up
+      ansible.builtin.command: docker-compose up -d --build
+      args:
+        chdir: /root/renter-score
+
+
+      
