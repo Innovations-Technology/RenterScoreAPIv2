@@ -20,7 +20,7 @@ public class PropertyDetailsWithImagesController(
         return Ok(vm);
     }
 
-    [HttpGet("property-details/{propertyId}")]
+    [HttpGet("details/{propertyId}")]
     public async Task<ActionResult<PropertyDetailsWithImagesViewModel>> GetProperties(long propertyId)
     {
         var propertyDetails = await _propertyDetailsWithImagesService.GetPropertyDetailsWithImagesAsync(propertyId);
