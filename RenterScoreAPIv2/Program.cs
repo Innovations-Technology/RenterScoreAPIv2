@@ -7,8 +7,6 @@ using RenterScoreAPIv2.Logging;
 using RenterScoreAPIv2.PropertyDetails;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.PropertyImage;
-using RenterScoreAPIv2.Tab;
-using RenterScoreAPIv2.UserProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
