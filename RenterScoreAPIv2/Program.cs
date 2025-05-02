@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RenterScoreAPIv2.ActionFilters;
 using RenterScoreAPIv2.AutoMapper;
 using RenterScoreAPIv2.EntityFramework;
+using RenterScoreAPIv2.Logging;
 using RenterScoreAPIv2.PropertyDetails;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.PropertyImage;
@@ -19,13 +20,13 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<LoggingActionFilter>();
 }).AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower);
-builder.Services.AddScoped<IPropertyDetailsRepository, LoggingPropertyRepositoryDecorator>();
+builder.Services.AddCountAndElapsedTimeLogging<IPropertyDetailsRepository, PropertyDetailsRepository>();
+builder.Services.AddCountAndElapsedTimeLogging<IPropertyDetailsWithImagesService, PropertyDetailsWithImagesService>();
 builder.Services.AddScoped<PropertyDetailsRepository>();
+builder.Services.AddScoped<PropertyDetailsWithImagesService>();
 builder.Services.AddScoped<PropertyImageRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<LoggingActionFilter>();
-builder.Services.AddScoped<IPropertyDetailsWithImagesService, PropertyDetailsWithImagesService>();
-builder.Services.AddScoped<PropertyDetailsWithImagesService>();
 builder.Services.AddScoped<UserProfileRepository>();
 builder.Services.AddScoped<IUserProfileRepository>(provider => 
 {

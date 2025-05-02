@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/v2/property")]
 [ApiController]
 public class PropertyDetailsWithImagesController(
-    PropertyDetailsWithImagesService propertyDetailsWithImagesService,
+    IPropertyDetailsWithImagesService propertyDetailsWithImagesService,
     IMapper mapper) : ControllerBase
 {
-    private PropertyDetailsWithImagesService _propertyDetailsWithImagesService = propertyDetailsWithImagesService;
+    private IPropertyDetailsWithImagesService _propertyDetailsWithImagesService = propertyDetailsWithImagesService;
     private readonly IMapper _mapper = mapper;
 
     [HttpGet("properties")]
