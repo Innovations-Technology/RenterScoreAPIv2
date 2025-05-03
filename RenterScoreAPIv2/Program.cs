@@ -7,6 +7,7 @@ using RenterScoreAPIv2.Logging;
 using RenterScoreAPIv2.PropertyDetails;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.PropertyImage;
+using RenterScoreAPIv2.PropertyRating;
 using RenterScoreAPIv2.Tab;
 using RenterScoreAPIv2.UserProfile;
 
@@ -25,6 +26,9 @@ builder.Services.AddCountAndElapsedTimeLogging<IPropertyDetailsWithImagesService
 builder.Services.AddScoped<PropertyDetailsRepository>();
 builder.Services.AddScoped<PropertyDetailsWithImagesService>();
 builder.Services.AddScoped<PropertyImageRepository>();
+builder.Services.AddScoped<RatingRepository>();
+builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+builder.Services.AddScoped<IPropertyRatingService, PropertyRatingService>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddScoped<LoggingActionFilter>();
 builder.Services.AddScoped<UserProfileRepository>();

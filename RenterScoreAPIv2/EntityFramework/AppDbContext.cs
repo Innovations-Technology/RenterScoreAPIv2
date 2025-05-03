@@ -6,6 +6,7 @@ using RenterScoreAPIv2.UserProfile;
 using RenterScoreAPIv2.User;
 using RenterScoreAPIv2.Utilities;
 using RenterScoreAPIv2.PropertyImage;
+using RenterScoreAPIv2.PropertyRating;
 
 public class AppDbContext(DbContextOptions dbContextOptions) : DbContext(dbContextOptions)
 {
@@ -13,9 +14,14 @@ public class AppDbContext(DbContextOptions dbContextOptions) : DbContext(dbConte
     public DbSet<UserProfile> UserProfiles { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<PropertyImage> PropertyImages { get; set; }
+    public DbSet<Rating> Ratings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Configure the composite primary key for Rating
+        modelBuilder.Entity<Rating>()
+            .HasKey(r => new { r.UserId, r.PropertyId });
+            
         SetDefaultSchema(modelBuilder);
         SetTableName(modelBuilder);
         SetSetColumnName(modelBuilder);

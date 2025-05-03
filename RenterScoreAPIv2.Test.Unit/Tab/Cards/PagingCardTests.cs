@@ -4,6 +4,7 @@ using Moq;
 using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.PropertyImage;
+using RenterScoreAPIv2.PropertyRating;
 using RenterScoreAPIv2.Tab.Cards;
 using RenterScoreAPIv2.User;
 using RenterScoreAPIv2.UserProfile;
@@ -25,6 +26,41 @@ public class PagingCardTests
         
         // Create test properties with different property types
         var now = DateTime.Now;
+        
+        // Create a default rating for test properties
+        var defaultRating = new PropertyRatingViewModel
+        {
+            PropertyId = 1,
+            Cleanliness = 4,
+            Traffic = 3,
+            Amenities = 5,
+            Safety = 4,
+            ValueForMoney = 3,
+            Total = 3.8m
+        };
+        
+        var defaultRating2 = new PropertyRatingViewModel
+        {
+            PropertyId = 2,
+            Cleanliness = 3,
+            Traffic = 4,
+            Amenities = 4,
+            Safety = 5,
+            ValueForMoney = 3,
+            Total = 3.8m
+        };
+        
+        var defaultRating3 = new PropertyRatingViewModel
+        {
+            PropertyId = 3,
+            Cleanliness = 5,
+            Traffic = 2,
+            Amenities = 4,
+            Safety = 3,
+            ValueForMoney = 5,
+            Total = 3.8m
+        };
+        
         _testProperties = new List<PropertyDetailsWithImages>
         {
             new PropertyDetailsWithImages
@@ -66,7 +102,8 @@ public class PagingCardTests
                     CreatedUser = 1, 
                     ModifiedUser = 1 
                 },
-                PropertyImages = new List<PropertyImage>()
+                PropertyImages = new List<PropertyImage>(),
+                PropertyRating = defaultRating
             },
             new PropertyDetailsWithImages
             {
@@ -107,7 +144,8 @@ public class PagingCardTests
                     CreatedUser = 1, 
                     ModifiedUser = 1 
                 },
-                PropertyImages = new List<PropertyImage>()
+                PropertyImages = new List<PropertyImage>(),
+                PropertyRating = defaultRating2
             },
             new PropertyDetailsWithImages
             {
@@ -148,7 +186,8 @@ public class PagingCardTests
                     CreatedUser = 1, 
                     ModifiedUser = 1 
                 },
-                PropertyImages = new List<PropertyImage>()
+                PropertyImages = new List<PropertyImage>(),
+                PropertyRating = defaultRating3
             }
         };
     }

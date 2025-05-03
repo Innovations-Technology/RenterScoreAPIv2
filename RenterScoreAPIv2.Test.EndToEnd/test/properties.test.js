@@ -59,6 +59,16 @@ function validateProperty(property) {
   expect(property).to.have.property('rent_type').that.is.a('string');
   expect(property).to.have.property('size').that.is.a('string');
   expect(property).to.have.property('title').that.is.a('string');
+  
+  // Rating properties - now nested
+  expect(property).to.have.property('rating').that.is.an('object');
+  expect(property.rating).to.have.property('property_id').that.is.a('number');
+  expect(property.rating).to.have.property('cleanliness').that.is.a('number');
+  expect(property.rating).to.have.property('traffic').that.is.a('number');
+  expect(property.rating).to.have.property('amenities').that.is.a('number');
+  expect(property.rating).to.have.property('safety').that.is.a('number');
+  expect(property.rating).to.have.property('value_for_money').that.is.a('number');
+  expect(property.rating).to.have.property('total').that.is.a('number');
 
   expect(property).to.have.property('address');
   expect(property.address).to.have.property('block_no').that.is.a('string');
