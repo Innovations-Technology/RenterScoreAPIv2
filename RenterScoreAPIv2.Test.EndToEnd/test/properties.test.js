@@ -31,7 +31,7 @@ describe('properties API testings', function () {
   this.timeout(5000);
   it('get property not exist', async () => {
     try {
-      await axios.get('http://localhost:5000/api/v2/property/details/123456');
+      await axios.get('http://localhost:5000/api/v2/property/property-details/123456');
       assert.fail('Expected error not thrown');
     } catch (error) {
       expect(error.response.status).to.equal(404);
