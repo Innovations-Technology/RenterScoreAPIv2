@@ -30,7 +30,7 @@ public class PropertyBannerCardTests
             
             var rating = new PropertyRatingViewModel
             {
-                PropertyId = i,
+                //PropertyId = i,
                 Cleanliness = 4,
                 Traffic = 3,
                 Amenities = 5,

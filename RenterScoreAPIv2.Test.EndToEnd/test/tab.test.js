@@ -66,7 +66,7 @@ function validateProperty(property) {
   expect(property).to.have.property('property_images').that.is.an('array');
   
   expect(property).to.have.property('property_rating').that.is.an('object');
-  expect(property.property_rating).to.have.property('property_id').that.is.a('number');
+  //expect(property.property_rating).to.have.property('property_id').that.is.a('number');
   expect(property.property_rating).to.have.property('cleanliness').that.is.a('number');
   expect(property.property_rating).to.have.property('traffic').that.is.a('number');
   expect(property.property_rating).to.have.property('amenities').that.is.a('number');

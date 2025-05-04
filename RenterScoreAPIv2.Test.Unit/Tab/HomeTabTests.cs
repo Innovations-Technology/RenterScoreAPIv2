@@ -25,7 +25,7 @@ public class HomeTabTests
         // Arrange
         var testPropertyRating = new PropertyRatingViewModel
         {
-            PropertyId = 1,
+            //PropertyId = 1,
             Cleanliness = 4,
             Traffic = 3,
             Amenities = 5,

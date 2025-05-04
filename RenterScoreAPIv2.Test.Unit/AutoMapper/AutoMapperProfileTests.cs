@@ -48,7 +48,7 @@ public class AutoMapperProfileTests
         
         // Assert
         Assert.That(viewModel, Is.Not.Null);
-        Assert.That(viewModel.PropertyId, Is.EqualTo(1));
+        //Assert.That(viewModel.PropertyId, Is.EqualTo(1));
         Assert.That(viewModel.Cleanliness, Is.EqualTo(4));
         Assert.That(viewModel.Traffic, Is.EqualTo(3));
         Assert.That(viewModel.Amenities, Is.EqualTo(5));
@@ -63,7 +63,7 @@ public class AutoMapperProfileTests
         // Arrange
         var ratingViewModel = new PropertyRatingViewModel
         {
-            PropertyId = 1,
+            //PropertyId = 1,
             Cleanliness = 4,
             Traffic = 3,
             Amenities = 5,
@@ -125,7 +125,7 @@ public class AutoMapperProfileTests
         
         // Assert
         Assert.That(viewModel.Rating, Is.Not.Null);
-        Assert.That(viewModel.Rating.PropertyId, Is.EqualTo(1));
+        //Assert.That(viewModel.Rating.PropertyId, Is.EqualTo(1));
         Assert.That(viewModel.Rating.Cleanliness, Is.EqualTo(4));
         Assert.That(viewModel.Rating.Traffic, Is.EqualTo(3));
         Assert.That(viewModel.Rating.Amenities, Is.EqualTo(5));

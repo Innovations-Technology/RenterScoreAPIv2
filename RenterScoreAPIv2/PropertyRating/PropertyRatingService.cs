@@ -14,7 +14,7 @@ public class PropertyRatingService(IRatingRepository ratingRepository) : IProper
         {
             return new PropertyRatingViewModel
             {
-                PropertyId = propertyId,
+                //PropertyId = propertyId,
                 Cleanliness = 0,
                 Traffic = 0,
                 Amenities = 0,
@@ -26,7 +26,7 @@ public class PropertyRatingService(IRatingRepository ratingRepository) : IProper
         
         return new PropertyRatingViewModel
         {
-            PropertyId = rating.PropertyId,
+            //PropertyId = rating.PropertyId,
             Cleanliness = rating.Cleanliness,
             Traffic = rating.Traffic,
             Amenities = rating.Amenities,
@@ -44,7 +44,7 @@ public class PropertyRatingService(IRatingRepository ratingRepository) : IProper
         {
             return new PropertyRatingViewModel
             {
-                PropertyId = propertyId,
+                //PropertyId = propertyId,
                 Cleanliness = 0,
                 Traffic = 0,
                 Amenities = 0,
@@ -56,7 +56,7 @@ public class PropertyRatingService(IRatingRepository ratingRepository) : IProper
         
         return new PropertyRatingViewModel
         {
-            PropertyId = propertyId,
+            //PropertyId = propertyId,
             Cleanliness = (int)Math.Round(ratings.Average(r => r.Cleanliness)),
             Traffic = (int)Math.Round(ratings.Average(r => r.Traffic)),
             Amenities = (int)Math.Round(ratings.Average(r => r.Amenities)),

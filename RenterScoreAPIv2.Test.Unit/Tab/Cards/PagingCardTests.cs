@@ -30,7 +30,7 @@ public class PagingCardTests
         // Create a default rating for test properties
         var defaultRating = new PropertyRatingViewModel
         {
-            PropertyId = 1,
+            //PropertyId = 1,
             Cleanliness = 4,
             Traffic = 3,
             Amenities = 5,
@@ -41,7 +41,7 @@ public class PagingCardTests
         
         var defaultRating2 = new PropertyRatingViewModel
         {
-            PropertyId = 2,
+            //PropertyId = 2,
             Cleanliness = 3,
             Traffic = 4,
             Amenities = 4,
@@ -52,7 +52,7 @@ public class PagingCardTests
         
         var defaultRating3 = new PropertyRatingViewModel
         {
-            PropertyId = 3,
+            //PropertyId = 3,
             Cleanliness = 5,
             Traffic = 2,
             Amenities = 4,
