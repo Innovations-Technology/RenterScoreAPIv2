@@ -2,6 +2,7 @@ namespace RenterScoreAPIv2.PropertyDetailsWithImages;
 
 using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.UserProfile;
+using RenterScoreAPIv2.PropertyRating;
 
 public class PropertyDetailsWithImagesViewModel
 {
@@ -29,4 +30,6 @@ public class PropertyDetailsWithImagesViewModel
     public string? RentType { get; set; }
     public string? Size { get; set; }
     public string? Title { get; set; }
+    
+    public required PropertyRatingViewModel Rating { get; set; }
 }
