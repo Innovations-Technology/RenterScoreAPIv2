@@ -41,6 +41,10 @@ public class AppDbContext(DbContextOptions dbContextOptions) : DbContext(dbConte
             {
                 entityType.SetTableName("users");
             }
+            else if (entityType.ClrType == typeof(Rating))
+            {
+                entityType.SetTableName("user_rating");
+            }
             else
             {
                 entityType.SetTableName(entityType.ClrType.Name.ToSnakeCase());
