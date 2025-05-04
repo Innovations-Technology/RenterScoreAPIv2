@@ -19,7 +19,7 @@ describe('properties API testings', function () {
 describe('properties API testings', function () {
   this.timeout(5000);
   it('get property', async () => {
-    const response = await axios.get('http://localhost:5000/api/v2/property/details/1');
+    const response = await axios.get('http://localhost:5000/api/v2/property/details/7');
     expect(response.status).to.equal(200);
 
     const property = response.data;
@@ -49,11 +49,13 @@ function validateProperty(property) {
   expect(property).to.have.property('currency').that.is.a('string');
   expect(property).to.have.property('description').that.is.a('string');
   expect(property).to.have.property('hero_image').that.is.a('string');
+  expect(property).to.have.property('is_bookmarked').that.is.a('boolean');
   expect(property).to.have.property('images').that.is.an('array');
   expect(property).to.have.property('modified_date').that.is.a('string');
   expect(property).to.have.property('modified_user').that.is.a('number');
   expect(property).to.have.property('price').that.is.a('number');
   expect(property).to.have.property('property_id').that.is.a('number');
+  expect(property).to.have.property('property_state').that.is.a('string');
   expect(property).to.have.property('property_status').that.is.a('string');
   expect(property).to.have.property('property_type').that.is.a('string');
   expect(property).to.have.property('rent_type').that.is.a('string');
