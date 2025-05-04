@@ -19,10 +19,12 @@ public class PropertyDetailsWithImagesViewModel
     public string? Description { get; set; }
     public string? HeroImage { get; set; }
     public string[] Images { get; set; } = [];
+    public bool IsBookmarked { get; set; }
     public string? ModifiedDate { get; set; }
     public long ModifiedUser { get; set; }
     public int? Price { get; set; }
     public long PropertyId { get; set; }
+    public string? PropertyState { get; set; }
     public string? PropertyStatus { get; set; }
     public string? PropertyType { get; set; }
     public string? RentType { get; set; }

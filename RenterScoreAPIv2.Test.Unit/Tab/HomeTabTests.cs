@@ -44,6 +44,7 @@ public class HomeTabTests
             ModifiedDate = DateTime.Now,
             CreatedUser = 1,
             ModifiedUser = 1,
+            PropertyState = "AVAILABLE",
             PropertyStatus = "Active",
             Region = "Test Region",
             RentType = "Monthly"
