@@ -16,6 +16,7 @@ public class Property
     public string? Currency { get; set; }
     public string? Description { get; set; }
     public string? HeroImage { get; set; }
+    public required string PropertyState { get; set; }
     public required string PropertyStatus { get; set; }
     public required string PropertyType { get; set; }
     public int? Price { get; set; }
