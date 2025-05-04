@@ -31,7 +31,8 @@ public class PagingCardTests
             {
                 Property = new Property { 
                     PropertyId = 1, 
-                    PropertyType = "HDB", 
+                    PropertyType = "HDB",
+                    PropertyState = "AVAILABLE",
                     PropertyStatus = "Active", 
                     Region = "North", 
                     RentType = "Room",
@@ -72,7 +73,8 @@ public class PagingCardTests
             {
                 Property = new Property { 
                     PropertyId = 2, 
-                    PropertyType = "HDB", 
+                    PropertyType = "HDB",
+                    PropertyState = "AVAILABLE",
                     PropertyStatus = "Active", 
                     Region = "East", 
                     RentType = "Room",
@@ -114,7 +116,8 @@ public class PagingCardTests
                 Property = new Property { 
                     PropertyId = 3, 
                     PropertyType = "Condo", 
-                    PropertyStatus = "Active", 
+                    PropertyStatus = "Active",
+                    PropertyState = "AVAILABLE",
                     Region = "Central", 
                     RentType = "Whole",
                     CreatedDate = now,

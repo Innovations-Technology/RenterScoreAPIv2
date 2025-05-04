@@ -30,7 +30,8 @@ public class PropertyBannerCardTests
             {
                 Property = new Property { 
                     PropertyId = i, 
-                    PropertyType = "HDB", 
+                    PropertyType = "HDB",
+                    PropertyState = "AVAILABLE",
                     PropertyStatus = "Active", 
                     Region = "North", 
                     RentType = "Room",
