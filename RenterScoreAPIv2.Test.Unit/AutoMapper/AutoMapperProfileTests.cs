@@ -78,6 +78,7 @@ public class AutoMapperProfileTests
             PropertyType = "Apartment",
             Region = "Region",
             RentType = "Monthly",
+            PropertyState = "AVAILABLE",
             PropertyStatus = "Active",
             CreatedDate = DateTime.Now,
             ModifiedDate = DateTime.Now,
