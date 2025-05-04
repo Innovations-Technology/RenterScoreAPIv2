@@ -4,6 +4,7 @@ using Moq;
 using RenterScoreAPIv2.Property;
 using RenterScoreAPIv2.PropertyDetailsWithImages;
 using RenterScoreAPIv2.PropertyImage;
+using RenterScoreAPIv2.PropertyRating;
 using RenterScoreAPIv2.Tab.Cards;
 using RenterScoreAPIv2.User;
 using RenterScoreAPIv2.UserProfile;
@@ -26,6 +27,18 @@ public class PropertyBannerCardTests
         for (int i = 1; i <= 5; i++)
         {
             var now = DateTime.Now;
+            
+            var rating = new PropertyRatingViewModel
+            {
+                //PropertyId = i,
+                Cleanliness = 4,
+                Traffic = 3,
+                Amenities = 5,
+                Safety = 4,
+                ValueForMoney = 3,
+                Total = 3.8m
+            };
+            
             _testProperties.Add(new PropertyDetailsWithImages
             {
                 Property = new Property { 
@@ -65,7 +78,8 @@ public class PropertyBannerCardTests
                     CreatedUser = 1, 
                     ModifiedUser = 1 
                 },
-                PropertyImages = new List<PropertyImage>()
+                PropertyImages = new List<PropertyImage>(),
+                PropertyRating = rating
             });
         }
     }
