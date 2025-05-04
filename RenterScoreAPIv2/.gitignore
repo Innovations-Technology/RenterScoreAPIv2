@@ -483,5 +483,5 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
-# .setupDBconn.sh
+# script to setup DB connection
 .setupDBconn.sh
