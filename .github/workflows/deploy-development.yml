@@ -47,7 +47,7 @@ jobs:
 
         aws apprunner update-service \
           --service-arn "$SERVICE_ARN" \
-          --source-configuration "ImageRepository={ImageIdentifier=${{ steps.login-ecr.outputs.registry }}/renter-score-api-v2:latest,ImageRepositoryType=ECR,ImageConfiguration={RuntimeEnvironmentVariables={connectionstring_default='${{ secrets.CONNECTIONSTRING_DEFAULT }}'}}}"
+          --source-configuration "ImageRepository={ImageIdentifier=${{ steps.login-ecr.outputs.registry }}/renter-score-api-v2:latest,ImageRepositoryType=ECR,ImageConfiguration={RuntimeEnvironmentVariables={CONNECTIONSTRING_DEFAULT='${{ secrets.CONNECTIONSTRING_DEFAULT }}'}}}"
 
     - name: Set up Python
       uses: actions/setup-python@v4
