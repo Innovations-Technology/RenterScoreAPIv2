@@ -18,6 +18,8 @@ public class PropertyDetailsRepository(
             on property.UserId equals user.UserId into usersGroup
             from user in usersGroup.DefaultIfEmpty()
             from userProfile in userProfilesGroup.DefaultIfEmpty()
+            orderby property.ModifiedDate descending
+            where property.PropertyState != "SUSPENDED"
             select new PropertyDetails
             {
                 Property = property,
