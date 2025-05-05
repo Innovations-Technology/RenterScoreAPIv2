@@ -41,6 +41,14 @@ jobs:
         docker push ${{ steps.login-ecr.outputs.registry }}/renter-score-api-v2:latest
       working-directory: RenterScoreAPIv2
 
+    - name: Deploy to App Runner
+      run: |
+        SERVICE_ARN=$(aws apprunner list-services --query "ServiceSummaryList[?ServiceName=='renter-score-api-v2'].ServiceArn" --output text)
+
+        aws apprunner update-service \
+          --service-arn "$SERVICE_ARN" \
+          --source-configuration "ImageRepository={ImageIdentifier=${{ steps.login-ecr.outputs.registry }}/renter-score-api-v2:latest,ImageRepositoryType=ECR,ImageConfiguration={RuntimeEnvironmentVariables={connectionstring_default='${{ secrets.CONNECTIONSTRING_DEFAULT }}'}}}"
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
