@@ -8,9 +8,17 @@ describe('properties API testings', function () {
     expect(response.status).to.equal(200);
 
     const properties = response.data;
-    expect(properties).to.be.an('array')
+    expect(properties).to.be.an('array');
     expect(properties).to.be.not.empty;
-
+    for (let i = 0; i < properties.length; i++) {
+      const property = properties[i];
+      expect(property).to.have.property('property_state').that.is.a('string').not.to.be.equal('SUSPENDED');
+      if (i == 0) continue;
+      expect(property).to.have.property('modified_date').that.is.a('string');
+      const currentModifiedDate = new Date(property.modified_date);
+      const previousModifiedDate = new Date(properties[i - 1].modified_date);
+      expect(currentModifiedDate).to.be.lessThan(previousModifiedDate);
+    }
     const property = properties[0];
     validateProperty(property);
   });
