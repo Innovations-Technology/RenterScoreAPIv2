@@ -37,6 +37,7 @@ jobs:
         docker build -t renter-score-api-v2:latest .
         docker tag renter-score-api-v2:latest ${{ secrets.DEV_DOCKER_USERNAME }}/renter-score-api-v2:latest
         docker push ${{ secrets.DEV_DOCKER_USERNAME }}/renter-score-api-v2:latest
+        docker tag renter-score-api-v2:latest ${{ steps.login-ecr.outputs.registry }}/renter-score-api-v2:latest
         docker push ${{ steps.login-ecr.outputs.registry }}/renter-score-api-v2:latest
       working-directory: RenterScoreAPIv2
 
