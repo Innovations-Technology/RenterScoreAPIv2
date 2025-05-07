@@ -7,13 +7,13 @@ describe('Rating API Tests', () => {
     describe('POST /rating', () => {
         it('should add a new rating successfully', async () => {
             const ratingData = {
-                userId: 44,
-                propertyId: 7,
+                user_id: 44,
+                property_id: 7,
                 cleanliness: 4,
                 traffic: 3,
                 amenities: 5,
                 safety: 4,
-                valueForMoney: 3
+                value_for_money: 3
             };
 
             const response = await axios.post(baseUrl, ratingData);
@@ -24,13 +24,13 @@ describe('Rating API Tests', () => {
 
         it('should update existing rating', async () => {
             const ratingData = {
-                userId: 44,
-                propertyId: 7,
+                user_id: 44,
+                property_id: 7,
                 cleanliness: 5,
                 traffic: 4,
                 amenities: 4,
                 safety: 5,
-                valueForMoney: 4
+                value_for_money: 4
             };
 
             const response = await axios.post(baseUrl, ratingData);
@@ -41,13 +41,13 @@ describe('Rating API Tests', () => {
 
         it('should return 404 for non-existent property', async () => {
             const ratingData = {
-                userId: 1,
-                propertyId: 999999,
+                user_id: 1,
+                property_id: 999999,
                 cleanliness: 4,
                 traffic: 3,
                 amenities: 5,
                 safety: 4,
-                valueForMoney: 3
+                value_for_money: 3
             };
 
             try {
