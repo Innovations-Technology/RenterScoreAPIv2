@@ -74,10 +74,13 @@ describe('Rating API Tests', () => {
         });
 
         it('should return "No rating found" for non-existent rating', async () => {
-            const response = await axios.get(`${baseUrl}?userId=999999&propertyId=999999`);
-            
-            expect(response.status).to.equal(200);
-            expect(response.data).to.equal('No rating found');
+            try {
+                await axios.get(`${baseUrl}?userId=999999&propertyId=999999`);
+                expect.fail('Should have thrown an error');
+            } catch (error) {
+                expect(error.response.status).to.equal(404);
+                expect(error.response.data).to.equal('No rating found');
+            }
         });
     });
 });

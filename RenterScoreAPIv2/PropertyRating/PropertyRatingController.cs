@@ -60,7 +60,7 @@ public class PropertyRatingController : ControllerBase
         var rating = await _propertyRatingService.GetPropertyRatingAsync(propertyId, userId);
         if (rating == null)
         {
-            return Ok("No rating found");
+            return NotFound("No rating found");
         }
 
         return Ok(rating);
