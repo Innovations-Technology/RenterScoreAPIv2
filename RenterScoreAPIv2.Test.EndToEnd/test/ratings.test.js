@@ -1,5 +1,5 @@
-const { expect } = require('chai');
-const axios = require('axios');
+import { expect } from 'chai';
+import axios from 'axios';
 
 describe('Rating API Tests', () => {
     const baseUrl = 'http://localhost:5000/api/v2/rating';
