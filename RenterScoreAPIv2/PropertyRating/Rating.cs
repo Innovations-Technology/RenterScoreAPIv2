@@ -17,6 +17,7 @@ public class Rating
     public required int Safety { get; set; }
     public required int ValueForMoney { get; set; }
     
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     [Column(TypeName = "decimal(3,2)")]
     public decimal Total { get; set; }
 } 
