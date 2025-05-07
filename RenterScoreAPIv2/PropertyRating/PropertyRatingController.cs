@@ -53,18 +53,6 @@ public class PropertyRatingController : ControllerBase
         await _context.SaveChangesAsync();
         return Ok("Rating added successfully");
     }
-
-    [HttpGet]
-    public async Task<IActionResult> GetRating([FromQuery] long userId, [FromQuery] long propertyId)
-    {
-        var rating = await _propertyRatingService.GetPropertyRatingAsync(propertyId, userId);
-        if (rating == null)
-        {
-            return NotFound("No rating found");
-        }
-
-        return Ok(rating);
-    }
 }
 
 public class AddRatingRequest

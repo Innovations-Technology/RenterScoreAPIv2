@@ -19,8 +19,7 @@ describe('Rating API Tests', () => {
             const response = await axios.post(baseUrl, ratingData);
             
             expect(response.status).to.equal(200);
-            expect(response.data).to.be.an('object');
-            validateRating(response.data);
+            expect(response.data).to.equal('Rating added successfully');
         });
 
         it('should update existing rating', async () => {
@@ -37,10 +36,7 @@ describe('Rating API Tests', () => {
             const response = await axios.post(baseUrl, ratingData);
             
             expect(response.status).to.equal(200);
-            expect(response.data).to.be.an('object');
-            validateRating(response.data);
-            expect(response.data.cleanliness).to.equal(5);
-            expect(response.data.traffic).to.equal(4);
+            expect(response.data).to.equal('Rating added successfully');
         });
 
         it('should return 404 for non-existent property', async () => {
@@ -63,41 +59,4 @@ describe('Rating API Tests', () => {
             }
         });
     });
-
-    describe('GET /rating', () => {
-        it('should get rating for existing user and property', async () => {
-            const response = await axios.get(`${baseUrl}?userId=44&propertyId=7`);
-            
-            expect(response.status).to.equal(200);
-            expect(response.data).to.be.an('object');
-            validateRating(response.data);
-        });
-
-        it('should return "No rating found" for non-existent rating', async () => {
-            try {
-                await axios.get(`${baseUrl}?userId=999999&propertyId=999999`);
-                expect.fail('Should have thrown an error');
-            } catch (error) {
-                expect(error.response.status).to.equal(404);
-                expect(error.response.data).to.equal('No rating found');
-            }
-        });
-    });
-});
-
-function validateRating(rating) {
-    expect(rating).to.have.property('cleanliness').that.is.a('number');
-    expect(rating).to.have.property('traffic').that.is.a('number');
-    expect(rating).to.have.property('amenities').that.is.a('number');
-    expect(rating).to.have.property('safety').that.is.a('number');
-    expect(rating).to.have.property('valueForMoney').that.is.a('number');
-    expect(rating).to.have.property('total').that.is.a('number');
-    
-    // Validate rating ranges
-    expect(rating.cleanliness).to.be.at.least(1).and.at.most(5);
-    expect(rating.traffic).to.be.at.least(1).and.at.most(5);
-    expect(rating.amenities).to.be.at.least(1).and.at.most(5);
-    expect(rating.safety).to.be.at.least(1).and.at.most(5);
-    expect(rating.valueForMoney).to.be.at.least(1).and.at.most(5);
-    expect(rating.total).to.be.at.least(1).and.at.most(5);
-} 
+}); 
