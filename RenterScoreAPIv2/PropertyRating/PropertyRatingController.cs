@@ -51,7 +51,7 @@ public class PropertyRatingController : ControllerBase
         }
 
         await _context.SaveChangesAsync();
-        return Ok("Rating added successfully");
+        return Ok(new { message = "Rating added successfully" });
     }
 }
 
