@@ -19,7 +19,7 @@ describe('Rating API Tests', () => {
             const response = await axios.post(baseUrl, ratingData);
             
             expect(response.status).to.equal(200);
-            expect(response.data).to.equal('Rating added successfully');
+            expect(response.data.message).to.equal('Rating added successfully');
         });
 
         it('should update existing rating', async () => {
@@ -36,7 +36,7 @@ describe('Rating API Tests', () => {
             const response = await axios.post(baseUrl, ratingData);
             
             expect(response.status).to.equal(200);
-            expect(response.data).to.equal('Rating added successfully');
+            expect(response.data.message).to.equal('Rating added successfully');
         });
 
         it('should return 404 for non-existent property', async () => {
