@@ -50,7 +50,7 @@
         force_source: true
     
     - name: docker compose down
-      ansible.builtin.command: docker-compose down
+      ansible.builtin.command: docker-compose down -v
       args:
         chdir: /root/renter-score
 
