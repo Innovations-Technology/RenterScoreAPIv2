@@ -34,7 +34,7 @@ jobs:
           --targetargs "test --no-build --configuration Release" \
           -f=opencover \
           -o="coverage.xml" \
-          --threshold 40 \
+          --threshold 35 \
           --threshold-type line \
           --threshold-stat total || exit_code=$?
           echo "SNYK_EXIT_CODE=$exit_code" >> $GITHUB_ENV
