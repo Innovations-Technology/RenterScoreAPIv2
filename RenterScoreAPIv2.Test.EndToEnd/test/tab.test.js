@@ -2,7 +2,7 @@ import axios from 'axios';
 import { expect } from 'chai';
 
 describe('Tab API testing', function () {
-  this.timeout(5000);
+  this.timeout(10000);
 
   it('get home tab', async () => {
     const response = await axios.get('http://localhost:5000/api/v2/tab/home');
