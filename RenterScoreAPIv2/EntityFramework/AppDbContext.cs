@@ -7,6 +7,7 @@ using RenterScoreAPIv2.User;
 using RenterScoreAPIv2.Utilities;
 using RenterScoreAPIv2.PropertyImage;
 using RenterScoreAPIv2.PropertyRating;
+using RenterScoreAPIv2.Bookmark;
 
 public class AppDbContext(DbContextOptions dbContextOptions) : DbContext(dbContextOptions)
 {
@@ -15,6 +16,7 @@ public class AppDbContext(DbContextOptions dbContextOptions) : DbContext(dbConte
     public DbSet<User> Users { get; set; }
     public DbSet<PropertyImage> PropertyImages { get; set; }
     public DbSet<Rating> Ratings { get; set; }
+    public DbSet<Bookmark> Bookmarks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

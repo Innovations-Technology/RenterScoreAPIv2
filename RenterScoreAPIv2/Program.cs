@@ -10,6 +10,7 @@ using RenterScoreAPIv2.PropertyImage;
 using RenterScoreAPIv2.PropertyRating;
 using RenterScoreAPIv2.Tab;
 using RenterScoreAPIv2.UserProfile;
+using RenterScoreAPIv2.Bookmark;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -40,6 +41,8 @@ builder.Services.AddScoped<IUserProfileRepository>(provider =>
 });
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 builder.Services.AddScoped<ITabFactory, TabFactory>();
+builder.Services.AddScoped<BookmarkRepository>();
+builder.Services.AddScoped<IBookmarkRepository, BookmarkRepository>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
