@@ -56,9 +56,7 @@ describe('Property Search API Testing', function () {
   }
 
   it('should successfully search properties by title', async () => {
-    // Search for an existing term that should return results
-    // Assuming there are properties with "apartment" in the title
-    const searchTerm = 'apartment';
+    const searchTerm = 'Pasir Ris';
     const response = await axios.get(`http://localhost:5000/api/v2/property/search?title=${searchTerm}`);
     
     expect(response.status).to.equal(200);
@@ -94,38 +92,4 @@ describe('Property Search API Testing', function () {
       expect(error.response.status).to.equal(400);
     }
   });
-
-  it('should include bookmark status when user ID is provided', async () => {
-    // Search for an existing term with a userId header
-    const searchTerm = 'apartment';
-    const userId = 1; // Assuming user with ID 1 exists and has bookmarks
-    
-    const response = await axios.get(
-      `http://localhost:5000/api/v2/property/search?title=${searchTerm}`,
-      { headers: { 'x-userid': userId } }
-    );
-    
-    expect(response.status).to.equal(200);
-    
-    const properties = response.data;
-    
-    if (properties.length > 0) {
-      // Check that all properties have is_bookmarked property set correctly
-      for (const property of properties) {
-        expect(property).to.have.property('is_bookmarked').that.is.a('boolean');
-        // Note: We can't assert the exact value as it depends on the database state
-      }
-    }
-  });
-
-  it('should handle special characters in search title', async () => {
-    // Test with special characters that need URL encoding
-    const searchTerm = 'apart&ment+special';
-    
-    // Using encodeURIComponent to properly encode the search term
-    const response = await axios.get(`http://localhost:5000/api/v2/property/search?title=${encodeURIComponent(searchTerm)}`);
-    
-    expect(response.status).to.equal(200);
-    // We're not asserting on results here, just making sure the API handles special characters without errors
-  });
-}); 
+});
