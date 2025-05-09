@@ -13,4 +13,5 @@ public class PropertyDetailsWithImages
     public required User User { get; set; }
     public required IEnumerable<PropertyImage> PropertyImages { get; set; }
     public required PropertyRatingViewModel PropertyRating { get; set; }
+    public bool IsBookmarked { get; set; }
 }
