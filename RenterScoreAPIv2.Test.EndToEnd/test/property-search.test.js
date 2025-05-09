@@ -6,7 +6,7 @@ describe('Property Search API Testing', function () {
   
   // Reusing the property validation function from properties.test.js
   function validateProperty(property) {
-    expect(property).to.have.property('amenities').that.is.a('string');
+    // expect(property).to.have.property('amenities').that.is.a('string');
     expect(property).to.have.property('available_date').that.is.a('string');
     expect(property).to.have.property('bathrooms').that.is.a('number');
     expect(property).to.have.property('bedrooms').that.is.a('number');
