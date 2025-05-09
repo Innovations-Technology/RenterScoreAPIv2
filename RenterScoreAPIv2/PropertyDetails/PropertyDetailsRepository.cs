@@ -50,4 +50,27 @@ public class PropertyDetailsRepository(
 
         return propertyDetails;
     }
+
+    public async Task<IEnumerable<PropertyDetails>> SearchPropertiesByTitleAsync(string titleSearch)
+    {
+        var propertyDetails = await (
+            from property in _context.Properties
+            join userProfile in _context.UserProfiles
+            on property.UserId equals userProfile.UserId into userProfilesGroup
+            join user in _context.Users
+            on property.UserId equals user.UserId into usersGroup
+            from user in usersGroup.DefaultIfEmpty()
+            from userProfile in userProfilesGroup.DefaultIfEmpty()
+            where property.PropertyState != "SUSPENDED" && 
+                  (property.Title != null && EF.Functions.Like(property.Title, $"%{titleSearch}%"))
+            orderby property.ModifiedDate descending
+            select new PropertyDetails
+            {
+                Property = property,
+                UserProfile = userProfile,
+                User = user,
+            }).ToListAsync();
+
+        return propertyDetails;
+    }
 }
