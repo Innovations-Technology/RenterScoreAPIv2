@@ -7,4 +7,6 @@ public interface IPropertyDetailsWithImagesService
     
     Task<IEnumerable<PropertyDetailsWithImages>> GetPropertyDetailsWithImagesListAsync(long? userId);
     Task<PropertyDetailsWithImages?> GetPropertyDetailsWithImagesAsync(long propertyId, long? userId);
+    
+    Task<IEnumerable<PropertyDetailsWithImages>> SearchPropertyDetailsWithImagesByTitleAsync(string titleSearch, long? userId);
 } 

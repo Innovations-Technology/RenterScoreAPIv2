@@ -10,14 +10,14 @@ using System.Collections.Generic;
 public class PropertyDetailsWithImagesService : IPropertyDetailsWithImagesService
 {
     private readonly IPropertyDetailsRepository _propertyDetailsRepository;
-    private readonly PropertyImageRepository _propertyImageRepository;
+    private readonly IPropertyImageRepository _propertyImageRepository;
     private readonly IPropertyRatingService _propertyRatingService;
     private readonly IBookmarkRepository _bookmarkRepository;
     private readonly IMapper _mapper;
 
     public PropertyDetailsWithImagesService(
         IPropertyDetailsRepository propertyDetailsRepository,
-        PropertyImageRepository propertyImageRepository,
+        IPropertyImageRepository propertyImageRepository,
         IPropertyRatingService propertyRatingService,
         IBookmarkRepository bookmarkRepository,
         IMapper mapper)
@@ -94,5 +94,38 @@ public class PropertyDetailsWithImagesService : IPropertyDetailsWithImagesServic
         }
         
         return PropertyDetailsWithImages;
+    }
+
+    public async Task<IEnumerable<PropertyDetailsWithImages>> SearchPropertyDetailsWithImagesByTitleAsync(string titleSearch, long? userId)
+    {
+        var PropertyDetailsWithImagesList = new List<PropertyDetailsWithImages>();
+        var propertyDetailsList = await _propertyDetailsRepository.SearchPropertiesByTitleAsync(titleSearch);
+
+        var propertyIds = propertyDetailsList.Select(pd => pd.Property.PropertyId).ToList();
+        var propertyImages = await _propertyImageRepository.GetPropertyImagesByIdsAsync(propertyIds);
+        var propertyImagesDict = propertyImages.GroupBy(pi => pi.PropertyId).ToDictionary(g => g.Key, g => g.ToList());
+        
+        foreach (var propertyDetails in propertyDetailsList)
+        {
+            var PropertyDetailsWithImages = _mapper.Map<PropertyDetailsWithImages>(propertyDetails);
+            
+            // Add property images
+            propertyImagesDict.TryGetValue(propertyDetails.Property.PropertyId, out var images);
+            PropertyDetailsWithImages.PropertyImages = images ?? new List<PropertyImage>();
+            
+            // Add property rating
+            var propertyRating = await _propertyRatingService.GetAveragePropertyRatingAsync(propertyDetails.Property.PropertyId);
+            PropertyDetailsWithImages.PropertyRating = propertyRating;
+            
+            // Check if property is bookmarked by the user
+            if (userId.HasValue)
+            {
+                PropertyDetailsWithImages.IsBookmarked = await _bookmarkRepository.IsPropertyBookmarkedByUserAsync(
+                    propertyDetails.Property.PropertyId, userId.Value);
+            }
+            
+            PropertyDetailsWithImagesList.Add(PropertyDetailsWithImages);
+        }
+        return PropertyDetailsWithImagesList;
     }
 }
