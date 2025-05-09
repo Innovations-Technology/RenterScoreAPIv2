@@ -15,7 +15,14 @@ public class PropertyDetailsWithImagesController(
     [HttpGet("properties")]
     public async Task<ActionResult<IEnumerable<PropertyDetailsWithImagesViewModel>>> GetProperties()
     {
-        var propertyDetails = await _propertyDetailsWithImagesService.GetPropertyDetailsWithImagesListAsync();
+        long? userId = null;
+        if (Request.Headers.TryGetValue("x-userid", out var userIdHeader) && 
+            long.TryParse(userIdHeader, out var parsedUserId))
+        {
+            userId = parsedUserId;
+        }
+        
+        var propertyDetails = await _propertyDetailsWithImagesService.GetPropertyDetailsWithImagesListAsync(userId);
         var vm = _mapper.Map<IEnumerable<PropertyDetailsWithImagesViewModel>>(propertyDetails);
         return Ok(vm);
     }
@@ -23,7 +30,14 @@ public class PropertyDetailsWithImagesController(
     [HttpGet("details/{propertyId}")]
     public async Task<ActionResult<PropertyDetailsWithImagesViewModel>> GetProperties(long propertyId)
     {
-        var propertyDetails = await _propertyDetailsWithImagesService.GetPropertyDetailsWithImagesAsync(propertyId);
+        long? userId = null;
+        if (Request.Headers.TryGetValue("x-userid", out var userIdHeader) && 
+            long.TryParse(userIdHeader, out var parsedUserId))
+        {
+            userId = parsedUserId;
+        }
+        
+        var propertyDetails = await _propertyDetailsWithImagesService.GetPropertyDetailsWithImagesAsync(propertyId, userId);
         if (propertyDetails == null)
         {
             return NotFound();
