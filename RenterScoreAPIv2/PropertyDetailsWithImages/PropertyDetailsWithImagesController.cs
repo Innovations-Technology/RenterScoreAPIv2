@@ -48,4 +48,24 @@ public class PropertyDetailsWithImagesController(
             return Ok(vm);
         }
     }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<PropertyDetailsWithImagesViewModel>>> SearchProperties([FromQuery] string title)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return BadRequest("Search title cannot be empty");
+        }
+        
+        long? userId = null;
+        if (Request.Headers.TryGetValue("x-userid", out var userIdHeader) && 
+            long.TryParse(userIdHeader, out var parsedUserId))
+        {
+            userId = parsedUserId;
+        }
+        
+        var propertyDetails = await _propertyDetailsWithImagesService.SearchPropertyDetailsWithImagesByTitleAsync(title, userId);
+        var vm = _mapper.Map<IEnumerable<PropertyDetailsWithImagesViewModel>>(propertyDetails);
+        return Ok(vm);
+    }
 }

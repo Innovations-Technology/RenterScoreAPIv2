@@ -95,4 +95,37 @@ public class PropertyDetailsWithImagesService : IPropertyDetailsWithImagesServic
         
         return PropertyDetailsWithImages;
     }
+
+    public async Task<IEnumerable<PropertyDetailsWithImages>> SearchPropertyDetailsWithImagesByTitleAsync(string titleSearch, long? userId)
+    {
+        var PropertyDetailsWithImagesList = new List<PropertyDetailsWithImages>();
+        var propertyDetailsList = await _propertyDetailsRepository.SearchPropertiesByTitleAsync(titleSearch);
+
+        var propertyIds = propertyDetailsList.Select(pd => pd.Property.PropertyId).ToList();
+        var propertyImages = await _propertyImageRepository.GetPropertyImagesByIdsAsync(propertyIds);
+        var propertyImagesDict = propertyImages.GroupBy(pi => pi.PropertyId).ToDictionary(g => g.Key, g => g.ToList());
+        
+        foreach (var propertyDetails in propertyDetailsList)
+        {
+            var PropertyDetailsWithImages = _mapper.Map<PropertyDetailsWithImages>(propertyDetails);
+            
+            // Add property images
+            propertyImagesDict.TryGetValue(propertyDetails.Property.PropertyId, out var images);
+            PropertyDetailsWithImages.PropertyImages = images ?? new List<PropertyImage>();
+            
+            // Add property rating
+            var propertyRating = await _propertyRatingService.GetAveragePropertyRatingAsync(propertyDetails.Property.PropertyId);
+            PropertyDetailsWithImages.PropertyRating = propertyRating;
+            
+            // Check if property is bookmarked by the user
+            if (userId.HasValue)
+            {
+                PropertyDetailsWithImages.IsBookmarked = await _bookmarkRepository.IsPropertyBookmarkedByUserAsync(
+                    propertyDetails.Property.PropertyId, userId.Value);
+            }
+            
+            PropertyDetailsWithImagesList.Add(PropertyDetailsWithImages);
+        }
+        return PropertyDetailsWithImagesList;
+    }
 }
