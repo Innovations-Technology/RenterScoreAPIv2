@@ -10,14 +10,14 @@ using System.Collections.Generic;
 public class PropertyDetailsWithImagesService : IPropertyDetailsWithImagesService
 {
     private readonly IPropertyDetailsRepository _propertyDetailsRepository;
-    private readonly PropertyImageRepository _propertyImageRepository;
+    private readonly IPropertyImageRepository _propertyImageRepository;
     private readonly IPropertyRatingService _propertyRatingService;
     private readonly IBookmarkRepository _bookmarkRepository;
     private readonly IMapper _mapper;
 
     public PropertyDetailsWithImagesService(
         IPropertyDetailsRepository propertyDetailsRepository,
-        PropertyImageRepository propertyImageRepository,
+        IPropertyImageRepository propertyImageRepository,
         IPropertyRatingService propertyRatingService,
         IBookmarkRepository bookmarkRepository,
         IMapper mapper)

@@ -27,6 +27,7 @@ builder.Services.AddCountAndElapsedTimeLogging<IPropertyDetailsWithImagesService
 builder.Services.AddScoped<PropertyDetailsRepository>();
 builder.Services.AddScoped<PropertyDetailsWithImagesService>();
 builder.Services.AddScoped<PropertyImageRepository>();
+builder.Services.AddScoped<IPropertyImageRepository, PropertyImageRepository>();
 builder.Services.AddScoped<RatingRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<IPropertyRatingService, PropertyRatingService>();
