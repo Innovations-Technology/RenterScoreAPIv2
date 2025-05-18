@@ -139,7 +139,7 @@ public class PropertyDetailsWithImagesControllerTests
         _mockMapper
             .Setup(m => m.Map<IEnumerable<PropertyDetailsWithImagesViewModel>>(It.IsAny<IEnumerable<PropertyDetailsWithImages>>()))
             .Returns(_mockViewModelList);
-        userId
+        long? userId = null;
 
         // Act
         var result = await _controller.GetProperties(userId);
