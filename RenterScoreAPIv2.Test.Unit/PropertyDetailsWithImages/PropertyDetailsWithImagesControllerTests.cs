@@ -186,6 +186,7 @@ public class PropertyDetailsWithImagesControllerTests
     {
         // Arrange
         long propertyId = 1;
+        long? userId = null;
         
         _mockService
             .Setup(s => s.GetPropertyDetailsWithImagesAsync(propertyId, It.IsAny<long?>()))
@@ -196,7 +197,7 @@ public class PropertyDetailsWithImagesControllerTests
             .Returns(_mockViewModel);
 
         // Act
-        var result = await _controller.GetProperties(propertyId);
+        var result = await _controller.GetProperties(propertyId, userId);
 
         // Assert
         Assert.That(result.Result, Is.TypeOf<OkObjectResult>());
@@ -211,13 +212,14 @@ public class PropertyDetailsWithImagesControllerTests
     {
         // Arrange
         long propertyId = 999;
+        long? userId = null;
         
         _mockService
             .Setup(s => s.GetPropertyDetailsWithImagesAsync(propertyId, It.IsAny<long?>()))
             .ReturnsAsync((PropertyDetailsWithImages)null);
 
         // Act
-        var result = await _controller.GetProperties(propertyId);
+        var result = await _controller.GetProperties(propertyId, userId);
 
         // Assert
         Assert.That(result.Result, Is.TypeOf<NotFoundResult>());
@@ -247,7 +249,7 @@ public class PropertyDetailsWithImagesControllerTests
             .Returns(_mockViewModel);
 
         // Act
-        var result = await _controller.GetProperties(propertyId);
+        var result = await _controller.GetProperties(propertyId, userId);
 
         // Assert
         _mockService.Verify(s => s.GetPropertyDetailsWithImagesAsync(propertyId, userId), Times.Once);
