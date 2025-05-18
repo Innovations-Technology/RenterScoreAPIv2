@@ -175,7 +175,7 @@ public class PropertyDetailsWithImagesControllerTests
             .Returns(_mockViewModelList);
 
         // Act
-        var result = await _controller.GetProperties();
+        var result = await _controller.GetProperties(userId);
 
         // Assert
         _mockService.Verify(s => s.GetPropertyDetailsWithImagesListAsync(userId), Times.Once);
@@ -285,9 +285,10 @@ public class PropertyDetailsWithImagesControllerTests
     {
         // Arrange
         string searchTitle = "";
+        long? userId = null;
 
         // Act
-        var result = await _controller.SearchProperties(searchTitle);
+        var result = await _controller.SearchProperties(searchTitle, userId);
 
         // Assert
         Assert.That(result.Result, Is.TypeOf<BadRequestObjectResult>());
@@ -298,9 +299,10 @@ public class PropertyDetailsWithImagesControllerTests
     {
         // Arrange
         string searchTitle = null;
+        long? userId = null;
 
         // Act
-        var result = await _controller.SearchProperties(searchTitle);
+        var result = await _controller.SearchProperties(searchTitle, userId);
 
         // Assert
         Assert.That(result.Result, Is.TypeOf<BadRequestObjectResult>());
