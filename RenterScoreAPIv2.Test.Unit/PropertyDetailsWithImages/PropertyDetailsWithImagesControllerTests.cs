@@ -139,9 +139,10 @@ public class PropertyDetailsWithImagesControllerTests
         _mockMapper
             .Setup(m => m.Map<IEnumerable<PropertyDetailsWithImagesViewModel>>(It.IsAny<IEnumerable<PropertyDetailsWithImages>>()))
             .Returns(_mockViewModelList);
+        userId
 
         // Act
-        var result = await _controller.GetProperties();
+        var result = await _controller.GetProperties(userId);
 
         // Assert
         Assert.That(result.Result, Is.TypeOf<OkObjectResult>());
@@ -257,7 +258,8 @@ public class PropertyDetailsWithImagesControllerTests
     {
         // Arrange
         string searchTitle = "Pasir Ris";
-        
+        long? userId = null;
+
         _mockService
             .Setup(s => s.SearchPropertyDetailsWithImagesByTitleAsync(searchTitle, It.IsAny<long?>()))
             .ReturnsAsync(_mockPropertyList);
@@ -265,9 +267,10 @@ public class PropertyDetailsWithImagesControllerTests
         _mockMapper
             .Setup(m => m.Map<IEnumerable<PropertyDetailsWithImagesViewModel>>(It.IsAny<IEnumerable<PropertyDetailsWithImages>>()))
             .Returns(_mockViewModelList);
+        
 
         // Act
-        var result = await _controller.SearchProperties(searchTitle);
+        var result = await _controller.SearchProperties(searchTitle, userId);
 
         // Assert
         Assert.That(result.Result, Is.TypeOf<OkObjectResult>());
@@ -327,7 +330,7 @@ public class PropertyDetailsWithImagesControllerTests
             .Returns(_mockViewModelList);
 
         // Act
-        var result = await _controller.SearchProperties(searchTitle);
+        var result = await _controller.SearchProperties(searchTitle, userId);
 
         // Assert
         _mockService.Verify(s => s.SearchPropertyDetailsWithImagesByTitleAsync(searchTitle, userId), Times.Once);
@@ -340,6 +343,7 @@ public class PropertyDetailsWithImagesControllerTests
         string searchTitle = "nonexistentpropertytitle";
         var emptyList = new List<PropertyDetailsWithImages>();
         var emptyViewModelList = new List<PropertyDetailsWithImagesViewModel>();
+        long? userId = null;
         
         _mockService
             .Setup(s => s.SearchPropertyDetailsWithImagesByTitleAsync(searchTitle, It.IsAny<long?>()))
@@ -350,7 +354,7 @@ public class PropertyDetailsWithImagesControllerTests
             .Returns(emptyViewModelList);
 
         // Act
-        var result = await _controller.SearchProperties(searchTitle);
+        var result = await _controller.SearchProperties(searchTitle, userId);
 
         // Assert
         Assert.That(result.Result, Is.TypeOf<OkObjectResult>());
